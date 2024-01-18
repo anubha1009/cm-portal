@@ -1,0 +1,21 @@
+.web-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+mat-toolbar {
+  flex-shrink: 0;
+}
+
+.header-format{
+    border-radius: 8px;
+    background: rgb(69,25,82);
+background: linear-gradient(0deg, rgba(69,25,82,1) 0%, rgba(29,26,57,1) 100%);
+}
+
+.sidebar-format{
+    border-radius: 8px;
+    background: rgb(69,25,82);
+background: linear-gradient(180deg, rgba(69,25,82,1) 0%, rgba(77,28,80,1) 60%, rgba(102,37,73,1) 100%);
+}

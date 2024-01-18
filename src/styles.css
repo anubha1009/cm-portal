@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: "Satoshi", sans-serif; 
+    background-color: #E8BCB9;
+}
+
+mat-sidenav-content{
+    background-color: #E8BCB9;
+}
+
+.primary-bg {
+    background-color: #451952;
+}
+
+.primary-bg-light {
+    background-color: #662549 !important;
+}
+
+.bg-light {
+    background-color: #E8BCB9 !important;
+}
+
+.bg-transparent {
+    background-color: transparent !important;
+}
