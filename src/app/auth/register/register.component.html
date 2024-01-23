@@ -1,0 +1,35 @@
+<form class="form-signin" [formGroup]="signUpForm" (submit)="signUp()">
+    <h2 class="form-signin-heading">Sign Up</h2>
+
+    <mat-form-field class="w-full">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" id="inputUsername" class="form-control" placeholder="Email" required autofocus
+            formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" id="inputPassword" class="form-control" placeholder="Password" required
+            formControlName="password">
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" id="inputName" class="form-control" placeholder="Name" required formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+        <mat-label>Phone</mat-label>
+        <input matInput type="number" id="inputPhone" class="form-control" placeholder="Phone" required formControlName="phone">
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+        <mat-label>Address</mat-label>
+        <input matInput type="text" id="inputAddress" class="form-control" placeholder="Address" required
+            formControlName="address">
+    </mat-form-field>
+
+    <button class="inline-flex me-3 items-center justify-center w-full px-4 py-3 text-lg text-center no-underline bg-blue-50 border-2 border-white rounded-full shadow-xl lg:text-xl lg:px-12 text-black hover:bg-transparent hover:border-white hover:text-blue-50 focus:outline-none lg:w-auto focus-visible:outline-black focus-visible:ring-black shadow-accent-900/20 cursor-pointer" type="submit" [disabled]="!signUpForm.valid">Sign Up</button>
+    <button class="inline-flex items-center justify-center w-full px-4 py-3 text-lg text-center no-underline bg-blue-50 border-2 border-white rounded-full shadow-xl lg:text-xl lg:px-12 text-black hover:bg-transparent hover:border-white hover:text-blue-50 focus:outline-none lg:w-auto focus-visible:outline-black focus-visible:ring-black shadow-accent-900/20 cursor-pointer" type="button" (click)="goToLogin()">Back to
+        Login</button>
+</form>

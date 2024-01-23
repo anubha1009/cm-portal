@@ -1,0 +1,18 @@
+.form-signin-heading {
+    margin-bottom: 1em;
+  }
+  
+  .form-signin{
+    padding: 6em;
+    border-radius: 50px;
+    background: transparent;
+    box-shadow: 20px 20px 60px #7125ca, -20px -20px 60px #892cff;
+    color: rgba(255, 255, 255, .8);
+    position: relative;
+    box-sizing: border-box;
+    height: fit-content;
+  }
+
+.back-login{
+    margin-left: 1em;
+}

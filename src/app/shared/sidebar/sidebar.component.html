@@ -1,0 +1,60 @@
+<div class="web-container">
+    <div>
+      <div [ngClass]="{ 'mob-hidden': isLeftVisible, 'button-trigger': !isLeftVisible }">
+        <button
+          (click)="setLeftVisible(!isLeftVisible)"
+          class="absolute left-5 top-10 w-6 h-6 bg-white rounded-full drop-shadow mob-custom-sidebar"
+        >
+          <img
+              src="../assets/images/right-arrow-backup-2-svgrepo-com.svg"
+              alt="Toggle"
+              [ngClass]="{ 'mob-hidden': isLeftVisible, 'w-4 h-4 mx-auto': !isLeftVisible }"
+            />
+        </button>
+      </div>
+      <div
+        [ngClass]="getDivClass()"
+      >
+        <div class="relative flex items-center justify-start h-16 ">
+          <button
+            (click)="!isLeftVisible ? handleCollapse() : setLeftVisible(!isLeftVisible)"
+            class="absolute right-0 transform translate-x-1/2 -translate-y-1/2 top-3/4 w-6 h-6 bg-white rounded-full drop-shadow"
+          >
+            <img
+              [src]="isCollapsed ? '../assets/images/right-arrow-backup-2-svgrepo-com.svg' : '../assets/images/left-arrow-backup-2-svgrepo-com.svg'"
+              alt="Toggle"
+              class="w-4 h-4 mx-auto"
+            />
+          </button>
+          <span class="text-purple-500 text-2xl font-bold">
+            <img [src]="isCollapsed ? '../assets/images/logo-mini.svg' : '../assets/images/logo.svg'" alt="Logo" class="ml-2 mt-5" [ngClass]="{'logo': !isCollapsed, 'logo-collapsed': isCollapsed}">
+          </span>
+        </div>
+        <div class="flex flex-grow mt-4">
+          <nav>
+            <ul class="flex flex-col py-4">
+              <li *ngFor="let item of menuItemsTop; let i = index"
+                  [ngClass]="{'bg-purple-500 rounded-r-full text-white': selectedItem.list === 'top' && selectedItem.index === i, 'ps-2 pe-3 py-2 text-custom-gray hover:bg-purple-500 hover:rounded-r-full hover:text-white flex items-center text-lg font-semibold mb-2': true, ' mr-1': isCollapsed}"
+                  (click)="setSelectedItem({ index: i, list: 'top' })">
+                <img [src]="item.icon" [alt]="item.name" class="mr-2 h-6 w-6" />
+                <a *ngIf="!isCollapsed" [href]="item.link">{{item.name}}</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="flex flex-grow mt-auto">
+          <nav>
+            <ul class="flex flex-col py-4">
+              <li *ngFor="let item of menuItemsBottom; let i = index"
+                  [ngClass]="{'bg-purple-500 rounded-r-full text-white': selectedItem.list === 'bottom' && selectedItem.index === i, 'ps-2 pe-3 py-2 text-custom-gray hover:bg-purple-500 hover:rounded-r-full hover:text-white flex items-center text-lg font-semibold mb-2': true, ' mr-1': isCollapsed}"
+                  (click)="setSelectedItem({ index: i, list: 'bottom' })">
+                <img [src]="item.icon" [alt]="item.name" class="mr-2 h-6 w-6"/>
+                <a *ngIf="!isCollapsed" [href]="item.link">{{item.name}}</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  

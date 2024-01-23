@@ -1,14 +1,21 @@
 @import url('https://fonts.cdnfonts.com/css/satoshi');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html, body { height: 100%; }
+
 body { 
     margin: 0; 
-    font-family: "Satoshi", sans-serif; 
-    background-color: #E8BCB9;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 mat-sidenav-content{
-    background-color: #E8BCB9;
+    background: transparent !important;
 }
 
 .primary-bg {
@@ -25,4 +32,32 @@ mat-sidenav-content{
 
 .bg-transparent {
     background-color: transparent !important;
+}
+
+.text-accent-xl {
+    color: #F39F5A !important;
+    font-size: 1.5rem !important;
+    font-weight: 300 !important;
+}
+
+.text-accent-lg {
+    color: #F39F5A !important;
+    font-size: 1.25rem !important;
+    font-weight: 300 !important;
+}
+
+.text-sub-lg {
+    color: #E8BCB9 !important;
+    font-size: 1.25rem !important;
+    font-weight: 300 !important;
+}
+
+.hover\:text-blue-50:hover {
+    --tw-text-opacity: 1;
+    color: rgb(239 246 255 / var(--tw-text-opacity)) !important;
+}
+
+.car-bg{
+    bottom: -15%;
+    right: -5%;
 }

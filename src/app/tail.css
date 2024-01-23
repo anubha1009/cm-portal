@@ -1,0 +1,237 @@
+.App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  .logo{
+    width: 6.5em;
+    height: auto;
+  }
+  .logo-collapsed{
+    width: 1.5em;
+    height: auto;
+  }
+  .drop-shadow {
+    box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.3);
+  }
+  .custom-banner{
+    background: linear-gradient(90deg, rgba(116,151,223,1) 0%, rgba(135,119,229,1) 35%, rgba(155,119,230,1) 100%);
+  }
+  .billListContainer {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .billListContainer .column1 {
+    flex: 60%;
+  }
+  
+  .billListContainer .column2 {
+    flex: 40%;
+  }
+  
+  .horizontalLine{
+    width: 100%;
+    background-color: #fd868c;
+    height: 0.4em;
+    border-radius: 0.5em;
+    margin-top: 1em;
+  }
+  
+  .group-member-circle {
+    width: 3em;
+    height: 3em;
+    background-color: #7e77e5;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: -1em;
+    position: relative;
+    border: 2px solid white;
+  }
+  
+  .group-member-circle::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 0;
+    width: 20px;
+    height: 30px;
+    background-color: white;
+    z-index: -1;
+  }
+  
+  .red-dot {
+    display: inline-block;
+    vertical-align: top;
+    padding-bottom: 10px;
+    position: relative;
+    text-align: center;
+    padding: 20px 10px;
+    line-height: 24px;
+    /* min-width: 100px; */
+    background: #333;
+    font-size: 20px;
+  }
+  .red-dot::before {
+    transform: translateX(-50%);
+    border-radius: 100%;
+    position: absolute;
+    background: blue;
+    bottom: 0;
+    height: 4px;
+    content: '';
+    width: 4px;
+    left: 50%;
+  }
+  
+  abbr:where([title]) {
+    -webkit-text-decoration: none;
+    text-decoration: none;
+  }
+  
+  .react-calendar__navigation__arrow{
+    position: relative;
+  }
+  .custom-event{
+    width: 100%;
+    padding: 1em;
+    border-left: 0.5em solid blue;
+    border-radius: 0.5em;
+  }
+  
+  .activeFilter{
+    padding: 1% 1%;
+      border-radius: 15%;
+      background-color: #7e77e5;
+      color: white;
+      margin-right: 2%;
+  }
+  .inactiveFilter{
+    padding: 1% 1%;
+      border-radius: 15%;
+    background-color: white;
+    margin-right: 2%;
+  }
+  
+  .filterContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1em;
+    /* justify-content: space-between; */
+  }
+  .w-80{
+    width: 80%;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @media (min-width: 1280px) {
+    .billListContainer .column1 {
+      flex: 70%;
+    }
+  
+    .billListContainer .column2 {
+      flex: 30%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .col-mob {
+      display: none;
+    }
+    .col-mob.visible {
+      display: block;
+      position: absolute;
+      height: 100%;
+    }
+    .button-trigger {
+      display: block;
+    }
+    .mob-center{
+      justify-content: center;
+      margin-top: 0.5em;
+      align-items: end;
+    }
+    .mob-hidden{
+      display: none;
+    }
+    .text-sm{
+      font-size: 0.7em;
+    }
+    .text-md{
+      font-size: 0.8em;
+    }
+    .text-lg{
+      font-size: 1em;
+    }
+    .text-xl{
+      font-size: 1.1em;
+    }
+    button{
+      font-size: 0.8em;
+    }
+    .billListContainer {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .billListContainer .column1 {
+      flex: 50%;
+    }
+    
+    .billListContainer .column2 {
+      flex: 50%;
+    }
+    .mob-checklist{
+      font-size: 1.5em !important;
+    }
+    .mob-custom-sidebar{
+      z-index: 101;
+    }
+    .mob-zindex-sidebar{
+      z-index: 100;
+    }
+  }
+  
+  @media (min-width: 769px) {
+    .col-mob {
+      display: block;
+    }
+    .button-trigger {
+      display: none;
+    }
+  }
