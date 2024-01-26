@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SharedModule } from '../shared.module';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../auth.service';
+import { ApiService } from '../../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   standalone: false,
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css', '../../tail.css']
+  styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
 
   isLeftVisible = false;
   isCollapsed = false;
@@ -16,13 +19,13 @@ export class SidebarComponent {
   menuItemsTop = [
     {
       name: "Dashboard",
-      link: "/#",
+      link: "/home",
       icon: "../assets/images/home-smile-angle-svgrepo-com.svg",
       selected: true,
     },
     {
       name: "Vehicles",
-      link: "/#",
+      link: "/home/vehicles",
       icon: "../assets/images/receipt-2-1-svgrepo-com.svg",
       selected: false,
     },
@@ -48,6 +51,33 @@ export class SidebarComponent {
       selected: false,
     },
   ];
+  role: string | null | undefined;
+  userDetails: any;
+
+  constructor(private authService: AuthService, private apiService: ApiService, private router: Router) { 
+    this.role = this.authService.getRole();
+    this.userDetails = JSON.parse(this.authService.getUserDetails()!);
+    this.authService.getRoute().subscribe((data: any) => {
+      console.log(data);
+      this.selectedItem = data;
+    });
+  }
+
+  ngOnInit(): void {
+    if(this.role == 'owner'){
+      // check if owner has a vehicle
+      this.apiService.getVehiclesOfOwner(this.userDetails?.ownerID).subscribe((data: any) => {
+        console.log(data);
+        sessionStorage.setItem('vehiclesCount', data.length);
+        if(data.length == 0){
+          // remove dashboard link
+          this.menuItemsTop.splice(0, 1);
+          this.router.navigate(['/home/vehicles']);
+        }
+      });
+    }
+  }
+
   setLeftVisible(value: boolean) {
     console.log(value);
     this.isLeftVisible = value;

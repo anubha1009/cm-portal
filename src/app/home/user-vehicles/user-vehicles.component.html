@@ -1,0 +1,39 @@
+<!-- Tailwind test -->
+
+<div class="billListContainer flex-column" [@expandShrink]="extendedView">
+    <div class="column1">
+      <div class="h-32 ml-4 py-2 px-2 mt-3 custom-banner rounded-xl mr-3">
+        <div class="billListContainer">
+          <div class="column1">
+            <div class="text-sm text-white font-thin ml-3 mt-2">
+              @if (vehiclesCount) {
+                To add another vehicle, enter VIN number.
+              }
+              @else {
+                You don't have any vehicles yet. To add a vehicle, enter VIN
+              }
+            </div>
+            <div class="text-2xl text-white font-normal ml-3 mt-1">
+              or Add manually
+            </div>
+            
+          </div>
+          <div class="flex w-48">
+            <button (click)="toggleView()" class="bg-white text-purple-500 text-md font-medium py-1 px-4 rounded-full mr-5 align-items-center w-full">
+              Add Vehicle
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add a form below which takes VIN as input.  -->
+    <div class="card flex flex-row m-3 p-4">
+      <mat-form-field class="w-full">
+        <mat-label>VIN</mat-label>
+        <input matInput type="text" maxlength="17" class="form-control border-none focus:border-none focus:bg-transparent"
+        (input)="checkVinLength($event)" id="vin" [(ngModel)]="vin">
+      </mat-form-field>
+    </div>
+</div>
+    

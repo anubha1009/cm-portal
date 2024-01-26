@@ -23,6 +23,7 @@
   .billListContainer {
     display: flex;
     flex-direction: row;
+    padding: 0.5em;
   }
   
   .billListContainer .column1 {

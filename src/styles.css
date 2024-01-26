@@ -1,8 +1,10 @@
-@import url('https://fonts.cdnfonts.com/css/satoshi');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
 
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+@import url('./app/tail.css');
+@import url('https://fonts.cdnfonts.com/css/satoshi');
 html, body { height: 100%; }
 
 body { 

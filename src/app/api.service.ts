@@ -15,6 +15,10 @@ export class ApiService {
     return this.http.get('https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json');
   }
 
+  decodeVin(vin: string) {
+    return this.http.get('https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/' + vin + '?format=json');
+  }
+
    ownerLogin(email: string, password: string){
     return this.http.post(this.baseUrl + '/users/login', {email, password});
   }
@@ -36,6 +40,8 @@ export class ApiService {
     let headers = {
       'Authorization': 'Bearer ' + sessionStorage.getItem('token')
     }
+    const result = this.http.get(this.baseUrl + '/vehicles/' + ownerId, {headers});
+    console.log(result);
     return this.http.get(this.baseUrl + '/vehicles/' + ownerId, {headers});
   }
 
