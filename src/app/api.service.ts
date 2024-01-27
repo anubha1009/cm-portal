@@ -7,16 +7,22 @@ import { environment } from '../environments/environment';
 })
 export class ApiService {
   private baseUrl = environment.baseUrl;
+  unsplashUrl = 'https://api.unsplash.com/search/photos?query=';
+  clientId = 'IU6aUkl8BLvPErMDWCI0G-fevl2wPkNvhB4iJrGb8B4';
   
   constructor(private http: HttpClient) { 
   }
 
-  getAllVehicleMakes() {
-    return this.http.get('https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json');
+  async getvehicleImage(query: string) : Promise<any> {
+    let headers = {
+      'Authorization': 'Client-ID ' + this.clientId,
+      'Accept-Version': 'v1'
+    }
+    return await this.http.get(this.unsplashUrl + query + '&orientation=landscape', {headers}).toPromise();
   }
 
   decodeVin(vin: string) {
-    return this.http.get('https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/' + vin + '?format=json');
+    return this.http.get('https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinExtended/' + vin + '?format=json');
   }
 
    ownerLogin(email: string, password: string){

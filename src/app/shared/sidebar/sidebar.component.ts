@@ -93,8 +93,8 @@ export class SidebarComponent implements OnInit {
 
   getDivClass() {
     let classes = 'flex flex-col h-screen bg-blue-50 border-r border-gray-300 transition-all duration-200 mob-zindex-sidebar col-mob';
-    classes += this.isCollapsed ? ' w-16' : ' w-48';
-    classes += this.isLeftVisible ? ' visible' : ' hidden';
+    // classes += this.isCollapsed ? ' w-16' : '';
+    classes += this.isLeftVisible ? ' hidden' : ' visible';
     return classes;
   }
 

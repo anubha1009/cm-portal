@@ -12,8 +12,9 @@
             />
         </button>
       </div>
-      <div
+      <div 
         [ngClass]="getDivClass()"
+        [ngStyle]="{ 'width': isCollapsed ? '5em' : '15em' }"
       >
         <div class="relative flex items-center justify-start h-16 ">
           <button

@@ -1,25 +1,29 @@
 <!-- Tailwind test -->
 
-<div class="billListContainer flex-column" [@expandShrink]="extendedView">
-    <div class="column1">
-      <div class="h-32 ml-4 py-2 px-2 mt-3 custom-banner rounded-xl mr-3">
+<div class="flex h-100">
+  <div
+    class="billListContainer flex-column h-100 flex-grow-1"
+    [@expandShrink]="extendedView"
+    [ngClass]="{ 'border-r border-gray-300': extendedView == 'expanded' }"
+  >
+    <div class="">
+      <div class="h-32 ml-4 py-3 px-5 mt-3 custom-banner rounded-xl mr-3">
         <div class="billListContainer">
           <div class="column1">
             <div class="text-sm text-white font-thin ml-3 mt-2">
-              @if (vehiclesCount) {
-                To add another vehicle, enter VIN number.
-              }
-              @else {
-                You don't have any vehicles yet. To add a vehicle, enter VIN
-              }
+              @if (vehiclesCount) { To add another vehicle, enter VIN number. }
+              @else { You don't have any vehicles yet. To add a vehicle, enter
+              VIN }
             </div>
             <div class="text-2xl text-white font-normal ml-3 mt-1">
               or Add manually
             </div>
-            
           </div>
           <div class="flex w-48">
-            <button (click)="toggleView()" class="bg-white text-purple-500 text-md font-medium py-1 px-4 rounded-full mr-5 align-items-center w-full">
+            <button
+              (click)="toggleView()"
+              class="bg-white text-purple-500 text-md font-medium py-1 px-4 rounded-full mr-5 align-items-center w-full"
+            >
               Add Vehicle
             </button>
           </div>
@@ -27,13 +31,105 @@
       </div>
     </div>
 
-    <!-- Add a form below which takes VIN as input.  -->
-    <div class="card flex flex-row m-3 p-4">
-      <mat-form-field class="w-full">
-        <mat-label>VIN</mat-label>
-        <input matInput type="text" maxlength="17" class="form-control border-none focus:border-none focus:bg-transparent"
-        (input)="checkVinLength($event)" id="vin" [(ngModel)]="vin">
+    @if (showVinForm) {
+    <div
+      class="card custom-card-bg border-none rounded-2xl flex flex-row m-3 py-4 px-5"
+      [@fadeIn]
+      [@fadeOut]
+    >
+      <mat-form-field class="w-full bg-transparent">
+        <mat-label class="text-purple-900">Enter VIN</mat-label>
+        <input
+          matInput
+          type="text"
+          maxlength="17" autofocus
+          class="border-none focus:border-none focus:bg-transparent"
+          (input)="checkVinLength($event)"
+          (blur)="handleVinBlur()"
+          id="vin"
+          [(ngModel)]="vin"
+        />
       </mat-form-field>
     </div>
+    }
+  </div>
+
+  @if(extendedView=='expanded' && vehicle.make){
+
+  <div class="flex flex-column" [@expandShrink]=extendedView>
+    <div class="flex">
+      <div class="display-5 text-purple-900 mt-3 ml-3 px-3">
+        {{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}
+      </div>
+      <div class="flex content-end ms-auto mt-3">
+        <div class="text-sm text-purple-900 font-bold cursor-pointer" (click)="closeVehicleDetails()">
+          Close
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="flex flex-wrap justify-around ps-3"
+      style="align-content: flex-start"
+      [@fadeIn]
+      [@fadeOut]
+    >
+      <!-- Engine Info Card -->
+      <div
+        class="card custom-card-sec border-none rounded-2xl m-3 py-4 px-4 flex"
+      >
+        <div class="flex">
+          <div class="flex items-center">
+            <img
+              src="../../../assets/images/engine.svg"
+              alt="Engine Image"
+              class="w-14 h-14"
+            />
+          </div>
+          <div class="w-3/4 flex flex-col items-center content-end ms-auto ps-4">
+            <div class="w-full flex" *ngFor="let key of vehicle.engine | keyvalue">
+              @if(key.value){
+              <div class="text-sm text-purple-800 font-thin content-start">
+                {{ key.key | titlecase }}
+              </div>
+              <div class="text-sm text-purple-900 font-semibold content-end ms-auto">
+                {{ key.value }}
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Body Info Card -->
+      <div class="card custom-card-sec border-none rounded-2xl m-3 py-4 px-4">
+        <div class="flex">
+          <div class="flex items-center">
+            <img
+              src="../../../assets/images/car-door.svg"
+              alt="Body Image"
+              class="w-14 h-14"
+            />
+          </div>
+          <div class="w-3/4 flex flex-col items-center content-end ms-auto ps-4">
+            <div class="w-full flex" *ngFor="let key of vehicle.body | keyvalue">
+              @if(key.value){
+              <div class="text-sm text-purple-800 font-thin content-start">
+                {{ key.key | titlecase }}
+              </div>
+              <div class="text-sm text-purple-900 font-semibold content-end ms-auto">
+                {{ key.value }}
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card custom-card-sec border-none rounded-2xl m-3 py-2 px-2">
+        <img [src]="vehicle.image" alt="Vehicle Image" class="flex content-center flex-grow-1 rounded-xl" />
+      </div>
+    </div>
+  </div>
+  }
 </div>
-    

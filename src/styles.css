@@ -1,14 +1,15 @@
-@import "tailwindcss/base";
-
-@import "tailwindcss/components";
-
-@import "tailwindcss/utilities";
 @import url('./app/tail.css');
 @import url('https://fonts.cdnfonts.com/css/satoshi');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html, body { height: 100%; }
 
 body { 
     margin: 0; 
+    font-size: 16px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -62,4 +63,43 @@ mat-sidenav-content{
 .car-bg{
     bottom: -15%;
     right: -5%;
+}
+input:focus{ 
+    outline: none !important;
+ }
+
+ .mdc-text-field{
+    background-color: transparent !important;
+}
+:root {
+    --mdc-filled-text-field-input-text-color: rgb(88 28 135);
+}
+
+.mat-mdc-form-field-focus-overlay{
+    border-radius: 8px !important;
+}
+
+.mdc-line-ripple::before{
+    border-bottom-color: #534f98 !important;
+}
+
+.custom-card-bg{
+    background: rgb(193,216,246);
+background: linear-gradient(270deg, rgba(193,216,246,1) 0%, rgba(219,234,254,1) 100%);
+box-shadow: 2px 2px 10px 0px #a8a6c9;
+}
+
+.custom-card-sec {
+    background: #eff6ff;
+    box-shadow: -18px -13px 30px #ffffff, -2px -1px 30px #e3dede;
+    max-height: max-content;
+    max-width: 100%;
+    flex-grow: 1;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 0s 600000s, color 0s 600000s !important;
 }
