@@ -52,7 +52,49 @@
       </mat-form-field>
     </div>
     }
+
+    @if (vehiclesCount) {
+      <div class="my-vehicles px-3">
+    
+        <div class="display-6 text-purple-700" *ngIf="vehicles.length > 0">
+            My Fleet
+        </div>
+    
+        <table *ngIf="vehicles.length > 0" class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th class="ellipsis" scope="col">Make</th>
+                    <th class="ellipsis" scope="col">Model</th>
+                    <th class="ellipsis" scope="col">Year</th>
+                    <th class="ellipsis" scope="col">VIN</th>
+                    <th class="ellipsis" title="License Plate" scope="col">License Plate</th>
+                    <th class="ellipsis" title="State Registered" scope="col">State Registered</th>
+                    <th class="ellipsis" scope="col">Mileage</th>
+                    <th class="ellipsis" title="Last Mileage Recorded" scope="col">Last Mileage Recorded</th>
+                    <th class="ellipsis" scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let vehicle of vehicles">
+                    <td class="ellipsis" title="{{vehicle.make}}">{{vehicle?.make}}</td>
+                    <td class="ellipsis" title="{{vehicle?.model}}">{{vehicle?.model}}</td>
+                    <td class="ellipsis" title="{{vehicle?.year}}">{{vehicle?.year}}</td>
+                    <td class="ellipsis" title="{{vehicle?.VIN}}">{{vehicle?.VIN}}</td>
+                    <td class="ellipsis" title="{{vehicle?.licensePlate}}">{{vehicle?.licensePlate}}</td>
+                    <td class="ellipsis" title="{{vehicle?.state}}">{{vehicle?.state}}</td>
+                    <td class="ellipsis" title="{{vehicle?.mileage}}">{{vehicle?.mileage}}</td>
+                    <td class="ellipsis" title="{{vehicle?.mileageDate | date}}">{{vehicle?.mileageDate | date}}</td>
+                    <td class="ellipsis">
+                        <img src="../../../assets/images/pencil.svg" alt="Edit" class="w-5 h-5 cursor-pointer inline-flex me-3"/>
+                        <img src="../../../assets/images/bin.svg" alt="Delete" class="w-5 h-5 cursor-pointer inline-flex" (click)="openDeleteDialog(vehicle)"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    }
   </div>
+
 
   @if(extendedView=='expanded' && vehicle.make){
 
@@ -128,6 +170,16 @@
 
       <div class="card custom-card-sec border-none rounded-2xl m-3 py-2 px-2">
         <img [src]="vehicle.image" alt="Vehicle Image" class="flex content-center flex-grow-1 rounded-xl" />
+      </div>
+
+      <!-- Add to fleet button -->
+      <div class="flex flex-column w-full py-2 px-2 justify-content-center">
+        <button
+          class="bg-purple-500 bg-opacity-90 text-white text-md font-thin py-3 px-3 rounded-full flex justify-content-center items-center w-3/4 ms-auto me-auto hover:bg-opacity-100 hover:font-normal"
+          (click)="addVehicle()"
+        >
+          Add to Fleet
+        </button>
       </div>
     </div>
   </div>

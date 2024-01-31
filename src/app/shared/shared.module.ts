@@ -13,6 +13,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { provideToastr } from 'ngx-toastr';
 import { AppComponent } from '../app.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AppComponent } from '../app.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatDialogModule,
   ],
   exports: [
     MatSidenavModule,
@@ -38,6 +40,7 @@ import { AppComponent } from '../app.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatDialogModule,
   ],
   providers: [
     ApiService

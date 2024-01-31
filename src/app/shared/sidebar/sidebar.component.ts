@@ -35,8 +35,8 @@ export class SidebarComponent implements OnInit {
       icon: "../assets/images/chat-round-svgrepo-com.svg",
       selected: false,
     },
-    // add more items as needed
   ];
+  menuCopy = this.menuItemsTop;
   menuItemsBottom = [
     {
       name: "Profile",
@@ -66,16 +66,74 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     if(this.role == 'owner'){
       // check if owner has a vehicle
-      this.apiService.getVehiclesOfOwner(this.userDetails?.ownerID).subscribe((data: any) => {
-        console.log(data);
-        sessionStorage.setItem('vehiclesCount', data.length);
-        if(data.length == 0){
-          // remove dashboard link
-          this.menuItemsTop.splice(0, 1);
-          this.router.navigate(['/home/vehicles']);
-        }
-      });
+      this.getVehicleCount();
     }
+
+    this.authService.getLink().subscribe((data: any) => {
+      console.log(data);
+      if(data == 'vehicles'){
+        this.getVehicleCount();
+      }
+    }
+    );
+  }
+
+  getVehicleCount() {
+    this.apiService.getVehiclesOfOwner(this.userDetails?.ownerID).subscribe((data: any) => {
+      console.log(data);
+      sessionStorage.setItem('vehiclesCount', data.length);
+      if(data.length == 0 && this.menuItemsTop.length == 3){
+        this.menuItemsTop.splice(0, 1);
+        this.setSelectedItem({
+          index: 0,
+          list: 'top'
+        });
+        this.router.navigate(['/home/vehicles']);
+      }
+      else{
+        if(this.menuItemsTop.length == 2){
+          this.menuItemsTop.splice(0, 0, {
+            name: "Dashboard",
+            link: "/home",
+            icon: "../assets/images/home-smile-angle-svgrepo-com.svg",
+            selected: true,
+          });
+          console.log(this.menuItemsTop);
+        }
+        this.menuItemsTop.forEach(element => {
+          if(window.location.href.includes(element.link)){
+            element.selected = true;
+            this.selectedItem = {
+              index: this.menuItemsTop.indexOf(element),
+              list: 'top'
+            };
+            // set other items to false
+            this.menuItemsTop.forEach(item => {
+              if(item.name != element.name){
+                item.selected = false;
+              }
+            });
+            return;
+          }
+        });
+        this.menuItemsBottom.forEach(element => {
+          if(window.location.href.includes(element.link)){
+            element.selected = true;
+            this.selectedItem = {
+              index: this.menuItemsBottom.indexOf(element),
+              list: 'bottom'
+            };
+            // set other items to false
+            this.menuItemsBottom.forEach(item => {
+              if(item.name != element.name){
+                item.selected = false;
+              }
+            });
+            return;
+          }
+        });
+      }
+    });
   }
 
   setLeftVisible(value: boolean) {

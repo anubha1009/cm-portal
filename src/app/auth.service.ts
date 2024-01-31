@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   sessionStorage: Storage | undefined;
   route: BehaviorSubject<any> = new BehaviorSubject<any>('');
+  link: BehaviorSubject<any> = new BehaviorSubject<any>('');
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
@@ -40,4 +41,11 @@ export class AuthService {
     this.route.next(route);
   }
 
+  getLink() {
+    return this.link.asObservable();
+  }
+
+  setLink(link: any) {
+    this.link.next(link);
+  }
 }
