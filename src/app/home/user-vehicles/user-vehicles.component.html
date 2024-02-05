@@ -6,8 +6,8 @@
     [@expandShrink]="extendedView"
     [ngClass]="{ 'hidden md:flex md:border-r md:border-gray-300': extendedView == 'expanded' }"
   >
-    <div class="">
-      <div class="h-32 ml-2 md:ml-4 py-3 px-3 md:px-5 mt-3 custom-banner rounded-xl mr-2 md:mr-3">
+    <div class="" >
+      <div class="h-32 ml-2 md:ml-4 py-3 px-3 md:px-5 my-3 custom-banner rounded-xl mr-2 md:mr-3">
         <div class="flex h-full">
           <div class="flex flex-grow-1 items-center">
             <div class="text-sm text-white font-thin ml-3 mt-2">
@@ -30,9 +30,8 @@
 
     @if (showVinForm) {
     <div
-      class="card custom-card-bg border-none rounded-2xl flex flex-row m-3 py-3 px-3 md:py-4 md:px-5"
-      [@fadeIn]
-      [@fadeOut]
+      class="card custom-card-bg border-none rounded-2xl flex flex-row mx-2 py-3 px-3 md:py-4 md:px-5"
+      [@slideInOut]
     >
       <mat-form-field class="w-full bg-transparent">
         <mat-label class="text-purple-900">Enter VIN</mat-label>
@@ -51,7 +50,7 @@
     }
 
     @if (vehiclesCount) {
-      <div class="my-vehicles px-3">
+      <div class="my-vehicles p-3" @slideInOut>
     
         <div class="display-6 text-purple-700" *ngIf="vehicles.length > 0">
             My Fleet

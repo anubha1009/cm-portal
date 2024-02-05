@@ -52,19 +52,22 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
     trigger('fadeOut', [
       transition(':leave', [animate('300ms', style({ opacity: 0 }))]),
     ]),
-    //slide from top
-    trigger('slideFromTop', [
+    trigger('slideInOut', [
       transition(':enter', [
-        style({ transform: 'translateY(-100%)' }),
-        animate('500ms', style({ transform: 'translateY(0)' })),
+        style({ opacity: 0 , height: '0'}),
+        animate('100ms', style({ height: '*'})),
+        animate('100ms', style({ margin: '*'})),
+        animate('100ms', style({ padding: '*'})),
+        animate('100ms', style({ opacity: 1 }))
       ]),
-    ]),
-    //exit to top
-    trigger('exitToTop', [
       transition(':leave', [
-        animate('500ms', style({ transform: 'translateY(-100%)' })),
-      ]),
-    ]),
+        style({ opacity: 1, height: '*'}),
+        animate('100ms', style({ opacity: 0 })),
+        animate('100ms', style({ padding: 0})),
+        animate('100ms', style({ margin: 0})),
+        animate('100ms', style({ height: 0 }))
+      ])
+    ])
   ],
 })
 export class UserVehiclesComponent {
