@@ -1,0 +1,52 @@
+<div class="flex flex-column flex-grow-1 md:ml-3 mr-3">
+  <div class="flex">
+    <div class="display-5 flex-grow-1 text-purple-900 mt-3 px-3 text-center md:text-start">
+      {{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}
+    </div>
+    <div class="flex content-end ms-auto mt-3">
+      <div class="text-sm text-purple-900 font-bold cursor-pointer" (click)="goBack()">
+        Close
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap ps-3 py-3" style="align-content: flex-start" [@fadeIn] [@fadeOut]>
+    <div class="flex flex-grow-1 flex-wrap gap-4">
+
+      <div class="flip-card min-h-40 w-full lg:w-fit">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <p class="text-3xl font-thin text-white z-20">Engine</p>
+          </div>
+          <div class="flip-card-back">
+            <div class="flex flex-column w-3/5">
+              <ng-container *ngFor="let key of vehicle.engine | keyvalue">
+                <div *ngIf="key.value != null" class="flex gap-2">
+                  <div class="text-xl text-white font-thin">{{ key.key | titlecase }}:</div>
+                  <div title="{{key.value}}" class="text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">{{ key.value }}</div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card min-h-40 w-full lg:w-fit">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <p class="text-3xl font-thin text-white z-20">Body</p>
+          </div>
+          <div class="flip-card-back">
+            <div class="flex flex-column w-3/5">
+              <ng-container *ngFor="let key of vehicle.body | keyvalue">
+                <div *ngIf="key.value != null" class="flex gap-2">
+                  <div class="text-xl text-white font-thin">{{ key.key | titlecase }}:</div>
+                  <div title="{{key.value}}" class="text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">{{ key.value }}</div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

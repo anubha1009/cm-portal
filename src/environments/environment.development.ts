@@ -1,4 +1,4 @@
 export const environment = {
-      baseUrl:"http://localhost:3000"
-      // baseUrl:"https://pmhr2vri7bs622yqnomo7vqxzm0cerug.lambda-url.us-east-2.on.aws"
+      // baseUrl:"http://localhost:3000"
+      baseUrl:"http://ec2-18-188-255-94.us-east-2.compute.amazonaws.com"
 };

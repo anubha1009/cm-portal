@@ -4,22 +4,19 @@
   <div
     class="billListContainer flex-column h-100 flex-grow-1"
     [@expandShrink]="extendedView"
-    [ngClass]="{ 'border-r border-gray-300': extendedView == 'expanded' }"
+    [ngClass]="{ 'hidden md:flex md:border-r md:border-gray-300': extendedView == 'expanded' }"
   >
     <div class="">
-      <div class="h-32 ml-4 py-3 px-5 mt-3 custom-banner rounded-xl mr-3">
-        <div class="billListContainer">
-          <div class="column1">
+      <div class="h-32 ml-2 md:ml-4 py-3 px-3 md:px-5 mt-3 custom-banner rounded-xl mr-2 md:mr-3">
+        <div class="flex h-full">
+          <div class="flex flex-grow-1 items-center">
             <div class="text-sm text-white font-thin ml-3 mt-2">
               @if (vehiclesCount) { To add another vehicle, enter VIN number. }
               @else { You don't have any vehicles yet. To add a vehicle, enter
               VIN }
             </div>
-            <div class="text-2xl text-white font-normal ml-3 mt-1">
-              or Add manually
-            </div>
           </div>
-          <div class="flex w-48">
+          <div class="flex w-24 md:w-48">
             <button
               (click)="toggleView()"
               class="bg-white text-purple-500 text-md font-medium py-1 px-4 rounded-full mr-5 align-items-center w-full"
@@ -33,7 +30,7 @@
 
     @if (showVinForm) {
     <div
-      class="card custom-card-bg border-none rounded-2xl flex flex-row m-3 py-4 px-5"
+      class="card custom-card-bg border-none rounded-2xl flex flex-row m-3 py-3 px-3 md:py-4 md:px-5"
       [@fadeIn]
       [@fadeOut]
     >
@@ -65,40 +62,35 @@
                 <tr>
                     <th class="ellipsis" scope="col">Make</th>
                     <th class="ellipsis" scope="col">Model</th>
-                    <th class="ellipsis" scope="col">Year</th>
-                    <th class="ellipsis" scope="col">VIN</th>
-                    <th class="ellipsis" title="License Plate" scope="col">License Plate</th>
-                    <th class="ellipsis" title="State Registered" scope="col">State Registered</th>
-                    <th class="ellipsis" scope="col">Mileage</th>
-                    <th class="ellipsis" title="Last Mileage Recorded" scope="col">Last Mileage Recorded</th>
-                    <th class="ellipsis" scope="col">Actions</th>
+                    <th class="ellipsis rounded-tr-md md:rounded-tr-none" scope="col">Year</th>
+                    <th class="ellipsis hidden xl:table-cell" scope="col">VIN</th>
+                    <th class="ellipsis hidden xl:table-cell" title="License Plate" scope="col">License Plate</th>
+                    <th class="ellipsis hidden xl:table-cell" title="State Registered" scope="col">State Registered</th>
+                    <th class="ellipsis hidden xl:table-cell" scope="col">Mileage</th>
+                    <th class="ellipsis hidden xl:table-cell" title="Last Mileage Recorded" scope="col">Last Mileage Recorded</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let vehicle of vehicles">
-                    <td class="ellipsis" title="{{vehicle.make}}">{{vehicle?.make}}</td>
-                    <td class="ellipsis" title="{{vehicle?.model}}">{{vehicle?.model}}</td>
-                    <td class="ellipsis" title="{{vehicle?.year}}">{{vehicle?.year}}</td>
-                    <td class="ellipsis" title="{{vehicle?.VIN}}">{{vehicle?.VIN}}</td>
-                    <td class="ellipsis" title="{{vehicle?.licensePlate}}">{{vehicle?.licensePlate}}</td>
-                    <td class="ellipsis" title="{{vehicle?.state}}">{{vehicle?.state}}</td>
-                    <td class="ellipsis" title="{{vehicle?.mileage}}">{{vehicle?.mileage}}</td>
-                    <td class="ellipsis" title="{{vehicle?.mileageDate | date}}">{{vehicle?.mileageDate | date}}</td>
-                    <td class="ellipsis">
-                        <img src="../../../assets/images/pencil.svg" alt="Edit" class="w-5 h-5 cursor-pointer inline-flex me-3"/>
-                        <img src="../../../assets/images/bin.svg" alt="Delete" class="w-5 h-5 cursor-pointer inline-flex" (click)="openDeleteDialog(vehicle)"/>
-                    </td>
-                </tr>
-            </tbody>
+              <tr *ngFor="let vehicle of vehicles; trackBy: trackbyVehicleId" class="hover:!bg-gray-100 relative cursor-pointer" (click)="selectVehicle(vehicle)" [ngClass]="{'selected' : selectedVehicle?.vehicleID == vehicle.vehicleID }">
+                  <td class="ellipsis pl-8 group-hover:!bg-gray-100" title="{{vehicle.make}}">{{vehicle?.make}}</td>
+                  <td class="ellipsis group-hover:!bg-gray-100" title="{{vehicle?.model}}">{{vehicle?.model}}</td>
+                  <td class="ellipsis group-hover:!bg-gray-100" title="{{vehicle?.year}}">{{vehicle?.year}}</td>
+                  <td class="ellipsis group-hover:!bg-gray-100 hidden xl:table-cell" title="{{vehicle?.VIN}}">{{vehicle?.VIN}}</td>
+                  <td class="ellipsis group-hover:!bg-gray-100 hidden xl:table-cell" title="{{vehicle?.licensePlate}}">{{vehicle?.licensePlate}}</td>
+                  <td class="ellipsis group-hover:!bg-gray-100 hidden xl:table-cell" title="{{vehicle?.state}}">{{vehicle?.state}}</td>
+                  <td class="ellipsis group-hover:!bg-gray-100 hidden xl:table-cell" title="{{vehicle?.mileage}}">{{vehicle?.mileage}}</td>
+                  <td class="ellipsis group-hover:!bg-gray-100 hidden xl:table-cell" title="{{vehicle?.mileageDate | date}}">{{vehicle?.mileageDate | date}}</td>
+              </tr>
+          </tbody>
         </table>
     </div>
     }
   </div>
 
+<!-- VIN Check -->
+  @if(extendedView=='expanded' && vehicle.make && !selectedVehicle.vehicleID){
 
-  @if(extendedView=='expanded' && vehicle.make){
-
-  <div class="flex flex-column" [@expandShrink]=extendedView>
+  <div class="flex flex-column w-full md:w-2/5" [@expandShrink]=extendedView>
     <div class="flex">
       <div class="display-5 text-purple-900 mt-3 ml-3 px-3">
         {{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}
@@ -168,7 +160,7 @@
         </div>
       </div>
 
-      <div class="card custom-card-sec border-none rounded-2xl m-3 py-2 px-2">
+      <div class="card custom-card-sec max-w-full	border-none rounded-2xl m-3 py-2 px-2">
         <img [src]="vehicle.image" alt="Vehicle Image" class="flex content-center flex-grow-1 rounded-xl" />
       </div>
 
@@ -183,5 +175,9 @@
       </div>
     </div>
   </div>
+  }
+
+  @if(extendedView=='expanded' && selectedVehicle.vehicleID){
+    <app-vehicle-details [vehicle]="selectedVehicle" (close)="closeVehicleDetailsUser($event)" class="w-full lg:w-2/5"></app-vehicle-details>
   }
 </div>

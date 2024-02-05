@@ -76,6 +76,9 @@ export class SidebarComponent implements OnInit {
       }
     }
     );
+
+    console.log(this.isLeftVisible);
+    console.log(this.isCollapsed);
   }
 
   getVehicleCount() {
@@ -150,9 +153,11 @@ export class SidebarComponent implements OnInit {
   }
 
   getDivClass() {
+    console.log(this.isCollapsed);
     let classes = 'flex flex-col h-screen bg-blue-50 border-r border-gray-300 transition-all duration-200 mob-zindex-sidebar col-mob';
     // classes += this.isCollapsed ? ' w-16' : '';
-    classes += this.isLeftVisible ? ' hidden' : ' visible';
+    classes += this.isLeftVisible ? ' visible' : ' hidden md:block';
+    classes += this.isCollapsed ? ' hidden md:visible md:w-16' : ' w-3/5 md:w-64';
     return classes;
   }
 
@@ -161,6 +166,15 @@ export class SidebarComponent implements OnInit {
     this.isCollapsed = !this.isCollapsed;
     console.log(this.isCollapsed);
     console.log(this.isLeftVisible);
+  }
+
+  routeChange(link: string) {
+    this.router.navigate([link]);    
+  }
+
+  onTopMenuItemClick(item: any, index: number) {
+    this.setSelectedItem({ index: index, list: 'top' });
+    this.routeChange(item.link);
   }
 
   logout() {

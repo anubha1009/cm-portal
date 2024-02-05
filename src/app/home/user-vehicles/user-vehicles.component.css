@@ -72,9 +72,21 @@ table tr:nth-child(2n) td {
     background-color: #dfdff8;
 }
 
+table .selected td {
+    background-color: #d0d0d1 !important;
+}
+
+table tr:nth-child(n):hover td {
+    background-color: #d0d0d1;
+}
+
 .ellipsis {
-    max-width: 5em;
+    max-width: 4.5em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+::ng-deep .mat-mdc-dialog-actions {
+    justify-content: center !important;
 }
