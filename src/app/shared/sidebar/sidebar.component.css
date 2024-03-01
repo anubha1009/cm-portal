@@ -19,3 +19,19 @@
   .bounce-right {
     animation: bounceRight 1s ease forwards;
   }
+
+  .hover-icon-change:hover .icon-default {
+    display: none;
+  }
+  
+  .hover-icon-change:hover .icon-selected {
+    display: inline;
+  }
+  
+  .icon-default {
+    display: inline;
+  }
+  
+  .icon-selected {
+    display: none;
+  }

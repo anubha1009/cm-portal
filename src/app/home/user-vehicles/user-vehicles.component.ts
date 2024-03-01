@@ -163,6 +163,12 @@ export class UserVehiclesComponent {
       this.selectedVehicle = {};
       this.vin = '';
     }
+    if (event === 'delete' || event === 'update') {
+      this.getVehiclesOfOwner();
+      this.extendedView = 'collapsed';
+      this.selectedVehicle = {};
+      this.vin = '';
+    }
   }
 
   checkVinLength(event: any) {
@@ -228,37 +234,6 @@ export class UserVehiclesComponent {
     });
   }
 
-  openDeleteDialog(vehicle: any) {
-    const dialogRef = this.dialog.open(DeleteVehicleDialog, {
-      data: vehicle,
-      width: '60%',
-      height: 'auto',
-      hasBackdrop: true,
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.getVehiclesOfOwner();
-      }
-    });
-  }
-
-  openUpdateDialog(vehicle: any) {
-    const dialogRef = this.dialog.open(UpdateVehicleDialog, {
-      data: vehicle,
-      width: '60%',
-      height: 'auto',
-      hasBackdrop: true,
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.toastr.success(result);
-        this.getVehiclesOfOwner();
-      }
-    });
-  }
-
   trackbyVehicleId(index: number, vehicle: any) {
     return vehicle.vehicleID;
   }
@@ -266,196 +241,6 @@ export class UserVehiclesComponent {
   selectVehicle(vehicle: any) {
     this.selectedVehicle = vehicle;
     this.extendedView = 'expanded';
-  }
-}
-
-@Component({
-  selector: 'delete-vehicle-dialog',
-  template: `
-    <div class="p-4 bg-custom-purple-l-translucent backdrop-blur border-s-custom-purple-l-translucent">
-      <h4
-        mat-dialog-title
-        class="display-6 text-purple-950 font-thin"
-        id="modal-basic-title"
-      >
-        Delete Vehicle?
-      </h4>
-      <div class="flex w-full mt-3">
-        <div
-          mat-dialog-content
-          class="flex flex-grow-1 text-xl font-thin items-center text-blue-50"
-        >
-          Are you sure you want to delete this vehicle? - {{ data?.make }}
-          {{ data?.model }} {{ data?.year }}
-        </div>
-        <div mat-dialog-actions class="flex flex-grow-1 justify-end ms-auto">
-          <button
-            type="button"
-            class="bg-rose-600 text-white font-thin text-lg rounded-lg p-3 me-5 hover:bg-rose-700"
-            (click)="deleteVehicle()"
-          >
-            Delete
-          </button>
-          <button
-            type="button"
-            class="bg-purple-700 text-white font-thin text-lg rounded-lg p-3 hover:bg-purple-800"
-            (click)="close(false)"
-          >
-            Cancel
-          </button>
-        </div>
-      </div>
-    </div>
-  `,
-})
-export class DeleteVehicleDialog {
-  constructor(
-    public modal: MatDialogRef<DeleteVehicleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private apiService: ApiService,
-    private authService: AuthService
-  ) {
-    console.log(data);
-  }
-
-  deleteVehicle() {
-    this.apiService
-      .deleteVehicleForOwner(this.data.vehicleID)
-      .subscribe((response: any) => {
-        if (response) {
-          this.authService.setLink('vehicles');
-          this.close(true);
-        }
-      });
-  }
-
-  close(value: boolean) {
-    this.modal.close(value);
-  }
-}
-
-// Update Vehicle Dialog
-@Component({
-  selector: 'update-vehicle-dialog',
-  template: `
-    <div class="p-4 bg-custom-purple-l-translucent backdrop-blur border-s-custom-purple-l-translucent">
-      <h4
-        class="display-6 text-purple-950 font-thin ms-3"
-        id="modal-basic-title"
-      >
-        Update Vehicle?
-      </h4>
-      <div class="flex w-full mt-3">
-        <div
-          mat-dialog-content
-          class="flex flex-grow-1 text-xl font-thin items-center"
-        >
-          <form
-            [formGroup]="editVehicleForm"
-            class="w-full"
-            (ngSubmit)="onEdit()"
-          >
-            <mat-form-field class="w-full">
-              <mat-label>License Plate</mat-label>
-              <input
-                matInput
-                formControlName="licensePlate"
-                placeholder="Enter License Plate"
-              />
-            </mat-form-field>
-            <mat-form-field class="w-full">
-              <mat-label>State</mat-label>
-              <input
-                matInput
-                formControlName="state"
-                placeholder="Enter State"
-              />
-            </mat-form-field>
-            <mat-form-field class="w-full">
-              <mat-label>Mileage</mat-label>
-              <input
-                matInput
-                type="number"
-                formControlName="mileage"
-                placeholder="Enter Mileage"
-              />
-            </mat-form-field>
-            <!-- <button
-              mat-raised-button
-              color="primary"
-              class="mt-3"
-              type="submit"
-              [disabled]="!editVehicleForm.valid"
-            >
-              Update Vehicle
-            </button> -->
-          </form>
-        </div>
-        <div mat-dialog-actions class="flex flex-col flex-grow-1 justify-center items-center ms-auto">
-          <button
-            type="button"
-            [disabled]="!editVehicleForm.valid"
-            class="bg-purple-700 text-white font-thin text-lg rounded-lg p-3 hover:bg-purple-800 w-full"
-            (click)="updateVehicle()"
-          >
-            Update
-          </button>
-          <button
-            type="button"
-            class="bg-rose-600 text-white font-thin text-lg rounded-lg p-3 hover:bg-rose-700 w-full mt-3"
-            (click)="close('')"
-          >
-            Cancel
-          </button>
-        </div>
-      </div>
-    </div>
-  `,
-})
-export class UpdateVehicleDialog {
-  editVehicleForm = new FormGroup({
-    vehicleID: new FormControl(''),
-    licensePlate: new FormControl('', [Validators.required]),
-    state: new FormControl(''),
-    mileage: new FormControl('', [Validators.required]),
-    mileageDate: new FormControl(new Date().toISOString().slice(0, 10)),
-  });
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public modal: MatDialogRef<UpdateVehicleDialog>,
-    private apiService: ApiService,
-    private authService: AuthService
-  ) {
-    console.log(data);
-    this.editVehicleForm.patchValue({
-      vehicleID: data.vehicleID,
-      licensePlate: data.licensePlate,
-      state: data.state,
-      mileage: data.mileage,
-    });
-  }
-
-  onEdit() {
-    if (this.editVehicleForm.valid) {
-      this.updateVehicle();
-    }
-  }
-
-  updateVehicle() {
-    this.apiService
-      .updateVehicleForOwner(this.editVehicleForm.value)
-      .subscribe((response: any) => {
-        console.log(response);
-        if (response) {
-          this.authService.setLink('vehicles');
-          this.close(response.message);
-        }
-      });
-  }
-
-  close(value: string) {
-    this.modal.close(value);
   }
 }
 

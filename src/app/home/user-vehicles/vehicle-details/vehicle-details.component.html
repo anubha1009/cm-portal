@@ -22,8 +22,11 @@
             <div class="flex flex-column w-4/5 xl:w-3/5">
               <ng-container *ngFor="let key of vehicle.engine | keyvalue">
                 <div *ngIf="key.value != null" class="flex gap-2">
-                  <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">{{ key.key | titlecase }}:</div>
-                  <div title="{{key.value}}" class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">{{ key.value }}</div>
+                  <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">{{ key.key | titlecase }}:
+                  </div>
+                  <div title="{{key.value}}"
+                    class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
+                    {{ key.value }}</div>
                 </div>
               </ng-container>
             </div>
@@ -40,8 +43,11 @@
             <div class="flex flex-column w-4/5">
               <ng-container *ngFor="let key of vehicle.body | keyvalue">
                 <div *ngIf="key.value != null" class="flex gap-2">
-                  <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">{{ key.key | titlecase }}:</div>
-                  <div title="{{key.value}}" class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">{{ key.value }}</div>
+                  <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">{{ key.key | titlecase }}:
+                  </div>
+                  <div title="{{key.value}}"
+                    class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
+                    {{ key.value }}</div>
                 </div>
               </ng-container>
             </div>
@@ -49,4 +55,76 @@
         </div>
       </div>
     </div>
+
+    <!-- Vehicle Metadata -->
+    <div class="flex flex-col flex-grow-1 custom-card-purple w-full p-2 mt-4 text-center items-center justify-center">
+      <div
+        class="flex flex-grow-1 text-3xl font-thin text-white justify-center text-center border-opacity-50 border-b border-b-purple-50 md:w-3/4">
+        Vehicle Meta Data:
+      </div>
+
+      <div class="flex flex-grow-1 justify-center w-full pt-3">
+        <div class="flex flex-column w-8/12 md:w-3/5">
+          <div class="flex gap-2">
+            <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Make:</div>
+            <div
+              class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+              {{ vehicle.make }}</div>
+          </div>
+          <div class="flex gap-2">
+            <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Model:</div>
+            <div
+              class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+              {{ vehicle.model }}</div>
+          </div>
+          <div class="flex gap-2">
+            <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Year:</div>
+            <div
+              class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+              {{ vehicle.year }}</div>
+          </div>
+          <div class="flex gap-2">
+            <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">VIN:</div>
+            <div
+              class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+              {{ vehicle.VIN }}</div>
+          </div>
+          <div class="flex gap-2">
+            <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">License Plate:</div>
+            <div
+              class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+              {{ vehicle.licensePlate }}</div>
+          </div>
+          <div class="flex gap-2">
+            <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">State Registered:</div>
+            <div
+              class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+              {{ vehicle.state }}</div>
+          </div>
+          <div class="flex gap-2">
+            <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Mileage:</div>
+            <div
+              class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+              {{ vehicle.mileage }}</div>
+          </div>
+          <div class="flex gap-2">
+            <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Mileage Date:</div>
+            <div
+              class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+              {{ vehicle.mileageDate | date: 'MMM d, y' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-grow-1 gap-4 justify-center mt-4">
+      <button class="flex bg-purple-700 text-white font-thin text-lg flex-grow-1 justify-center rounded-lg p-3 hover:bg-purple-800" (click)="openUpdateDialog(vehicle)">
+        Edit Vehicle
+      </button>
+      <button class="flex bg-rose-600 text-white font-thin text-lg flex-grow-1 justify-center rounded-lg p-3 hover:bg-rose-700" (click)="openDeleteDialog(vehicle)">
+        Delete Vehicle
+      </button>
+    </div>
   </div>
+</div>

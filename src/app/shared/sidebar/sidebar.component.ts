@@ -41,36 +41,39 @@ export class SidebarComponent implements OnInit {
       name: 'Dashboard',
       link: '/home',
       icon: '../assets/images/home-smile-angle-svgrepo-com.svg',
+      iconSelected: '../assets/images/home-smile-angle-svgrepo-com-white.svg',
       selected: true,
     },
     {
       name: 'Vehicles',
       link: '/home/vehicles',
       icon: '../assets/images/receipt-2-1-svgrepo-com.svg',
+      iconSelected: '../assets/images/receipt-2-1-svgrepo-com-white.svg',
       selected: false,
     },
     {
       name: 'Appointments',
-      link: '/#',
+      link: '/home/appointments',
       icon: '../assets/images/chat-round-svgrepo-com.svg',
+      iconSelected: '../assets/images/chat-round-svgrepo-com-white.svg',
       selected: false,
     },
-  ];
-  menuCopy = this.menuItemsTop;
-  menuItemsBottom = [
     {
       name: 'Profile',
-      link: '/#',
+      link: '/home/vehicles',
       icon: '../assets/images/profile-circle-svgrepo-com.svg',
+      iconSelected: '../assets/images/profile-circle-svgrepo-com-white.svg',
       selected: false,
     },
     {
       name: 'Logout',
-      link: '#',
+      link: '/#',
       icon: '../assets/images/logout-2-svgrepo-com.svg',
+      iconSelected: '../assets/images/logout-2-svgrepo-com-white.svg',
       selected: false,
     },
   ];
+  menuCopy = this.menuItemsTop;
   role: string | null | undefined;
   userDetails: any;
   @ViewChild('bounceButton') bounceButton: ElementRef | undefined;
@@ -86,10 +89,10 @@ export class SidebarComponent implements OnInit {
     this.authService.getRoute().subscribe((data: any) => {
       console.log(data);
       this.selectedItem = data;
+      console.log(this.menuItemsTop);
     });
 
     //get user device resolution
-    console.log(window.innerWidth);
     if (window.innerWidth > 768) {
       this.isMobile = false;
       this.isLeftVisible = true;
@@ -111,8 +114,6 @@ export class SidebarComponent implements OnInit {
     setTimeout(() => {
       this.bounceButton!.nativeElement.classList.add('bounce-right');
     }, 0);
-    console.log(this.isLeftVisible);
-    console.log(this.isCollapsed);
   }
 
   getVehicleCount() {
@@ -134,6 +135,8 @@ export class SidebarComponent implements OnInit {
               name: 'Dashboard',
               link: '/home',
               icon: '../assets/images/home-smile-angle-svgrepo-com.svg',
+              iconSelected:
+                '../assets/images/home-smile-angle-svgrepo-com-white.svg',
               selected: true,
             });
             console.log(this.menuItemsTop);
@@ -147,22 +150,6 @@ export class SidebarComponent implements OnInit {
               };
               // set other items to false
               this.menuItemsTop.forEach((item) => {
-                if (item.name != element.name) {
-                  item.selected = false;
-                }
-              });
-              return;
-            }
-          });
-          this.menuItemsBottom.forEach((element) => {
-            if (window.location.href.includes(element.link)) {
-              element.selected = true;
-              this.selectedItem = {
-                index: this.menuItemsBottom.indexOf(element),
-                list: 'bottom',
-              };
-              // set other items to false
-              this.menuItemsBottom.forEach((item) => {
                 if (item.name != element.name) {
                   item.selected = false;
                 }
@@ -188,10 +175,8 @@ export class SidebarComponent implements OnInit {
   }
 
   getDivClass() {
-    console.log(this.isCollapsed);
     let classes =
-      'flex flex-col h-screen bg-blue-50 border-r border-gray-300 transition-all duration-200 mob-zindex-sidebar col-mob';
-    // classes += this.isCollapsed ? ' w-16' : '';
+      'flex flex-col h-screen bg-purple-300 border-r border-gray-300 transition-all duration-200 mob-zindex-sidebar col-mob';
     classes += this.isLeftVisible ? ' visible' : ' hidden md:block';
     classes += this.isCollapsed
       ? ' hidden md:flex md:w-16'
@@ -200,10 +185,7 @@ export class SidebarComponent implements OnInit {
   }
 
   handleCollapse() {
-    console.log('handle collapse ' + this.isCollapsed);
     this.isCollapsed = !this.isCollapsed;
-    console.log(this.isCollapsed);
-    console.log(this.isLeftVisible);
   }
 
   routeChange(link: string) {

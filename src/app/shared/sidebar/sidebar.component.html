@@ -34,22 +34,16 @@
             <nav @slideInOut>
               <ul class="flex flex-col py-4" @slideInOut>
                 <li *ngFor="let item of menuItemsTop; let i = index"
-                    [ngClass]="{'bg-purple-500 cursor-pointer rounded-r-full text-white': selectedItem.list === 'top' && selectedItem.index === i, 'ps-2 pe-3 py-2 text-custom-gray hover:bg-purple-500 hover:rounded-r-full hover:text-white flex items-center text-lg font-semibold mb-2': true, ' mr-1': isCollapsed}"
+                    [ngClass]="{'bg-purple-500 cursor-pointer rounded-r-full text-white': selectedItem.list === 'top' && selectedItem.index === i, 'ps-2 pe-3 py-2 text-custom-gray hover:bg-purple-500 hover:bg-opacity-85 hover:rounded-r-full hover:text-white flex items-center text-lg font-semibold mb-2 hover-icon-change': true, ' mr-1': isCollapsed}"
                     (click)="onTopMenuItemClick(item, i)" @slideInOut>
-                  <img [src]="item.icon" [alt]="item.name" class="mr-2 h-6 w-6" @slideInOut />
+                  @if(selectedItem.list == 'top' && selectedItem.index == i){
+                    <img [src]="item.iconSelected" [alt]="item.name" class="mr-2 h-6 w-6" />
+                  }
+                  @else{
+                    <img [src]="item.icon" [alt]="item.name" class="mr-2 h-6 w-6 icon-default" />
+                    <img [src]="item.iconSelected" [alt]="item.name" class="mr-2 h-6 w-6 icon-selected" />
+                  }
                   <span *ngIf="!isCollapsed" class="cursor-pointer" @slideInOut>{{item.name}}</span>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div class="flex flex-grow mt-auto" @slideInOut>
-            <nav @slideInOut>
-              <ul class="flex flex-col py-4" @slideInOut>
-                <li *ngFor="let item of menuItemsBottom; let i = index"
-                    [ngClass]="{'bg-purple-500 rounded-r-full text-white': selectedItem.list === 'bottom' && selectedItem.index === i, 'ps-2 pe-3 py-2 text-custom-gray hover:bg-purple-500 hover:rounded-r-full hover:text-white flex items-center text-lg font-semibold mb-2': true, ' mr-1': isCollapsed}"
-                    (click)="setSelectedItem({ index: i, list: 'bottom' })" @slideInOut>
-                  <img [src]="item.icon" [alt]="item.name" class="mr-2 h-6 w-6" @slideInOut/>
-                  <a *ngIf="!isCollapsed" [href]="item.link" @slideInOut>{{item.name}}</a>
                 </li>
               </ul>
             </nav>
