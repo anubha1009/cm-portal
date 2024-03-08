@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { provideToastr } from 'ngx-toastr';
 import { AppComponent } from '../app.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select'; 
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     ReactiveFormsModule,
     HttpClientModule,
     MatDialogModule,
+    MatSelectModule
   ],
   exports: [
     MatSidenavModule,
@@ -41,6 +43,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     ReactiveFormsModule,
     HttpClientModule,
     MatDialogModule,
+    MatSelectModule
   ],
   providers: [
     ApiService

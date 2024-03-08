@@ -37,6 +37,14 @@ table tr:first-child th {
     font-size: 1em;
     border: none;
 }
+
+.open-appointment{
+    background-color: #c7f1d1 !important;
+}
+
+.closed-appointment{
+    background-color: #f1c7c7 !important;
+}
 table tr:nth-child(2n) td {
     background-color: #dfdff8;
 }

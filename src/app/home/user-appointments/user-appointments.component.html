@@ -1,46 +1,84 @@
 <div class="flex h-100">
-    <div
-      class="billListContainer flex-column h-100 flex-grow-1"
-      [@expandShrink]="extendedView"
-      [ngClass]="{ 'hidden md:flex md:border-r md:border-purple-500': extendedView == 'expanded' }"
-    >
-        @if(appointments.length > 0){
-            <div class="mt-3 p-3" @slideInOut>
-    
-                <div class="display-6 text-purple-700">
-                    My Appointments
+    <div class="billListContainer flex-column h-100 flex-grow-1" [@expandShrink]="extendedView"
+        [ngClass]="{ 'hidden md:flex md:border-r md:border-purple-500': extendedView == 'expanded' }">
+        <div class="" >
+            <div class="h-32 ml-2 md:ml-4 py-3 px-3 md:px-5 my-3 custom-banner rounded-xl mr-2 md:mr-3">
+              <div class="flex h-full">
+                <div class="flex flex-grow-1 items-center">
+                  <div class="text-sm text-white font-thin ml-3 mt-2">
+                    @if (appointments.length > 0) { To schedule another appointment, click the Schedule Appointment Button. }
+                    @else { You do not have any appointments yet. To schedule an appointment, click the Schedule Appointment Button. }
+                  </div>
                 </div>
-            
-                <table class="table table-striped mt-3">
-                    <thead>
-                        <tr>
-                            <th class="ellipsis" scope="col" title="Appointment Date">Appointment Date</th>
-                            <th class="ellipsis" scope="col">Status</th>
-                            <th class="ellipsis rounded-tr-md md:rounded-tr-none" scope="col">Last Updated</th>
-                            <th class="ellipsis hidden xl:table-cell" scope="col">Type</th>
-                            <th class="ellipsis hidden xl:table-cell" title="Vehicle" scope="col">Vehicle</th>
-                            <th class="ellipsis hidden xl:table-cell" title="License Plate" scope="col">License Plate</th>
-                            <th class="ellipsis hidden xl:table-cell" scope="col">Mileage</th>
-                            <th class="ellipsis hidden xl:table-cell" title="Provider Selected" scope="col">Provider Selected</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let appointment of appointments; trackBy: trackbyAppointmentId" class="hover:!bg-gray-100 relative cursor-pointer" (click)="selectAppointment(appointment)" [ngClass]="{'selected' : selectedAppointment?.appointmentID == appointment.appointmentID }">
-                          <td class="ellipsis pl-8 group-hover:!bg-gray-100" title="{{appointment?.appointmentDate | date:'medium'}}">{{appointment?.appointmentDate | date:'medium'}}</td>
-                          <td class="ellipsis group-hover:!bg-gray-100" title="{{appointment?.appointmentStatus}}">{{appointment?.appointmentStatus}}</td>
-                          <td class="ellipsis group-hover:!bg-gray-100" title="{{appointment?.lastUpdate | date:'medium'}}">{{appointment?.lastUpdate | date:'medium'}}</td>
-                          <td class="ellipsis group-hover:!bg-gray-100 hidden xl:table-cell" title="{{appointment?.serviceType}}">{{appointment?.serviceType}}</td>
-                          <td class="ellipsis group-hover:!bg-gray-100 hidden xl:table-cell" title="{{appointment?.vehicleDetails[0]?.year + ' ' + appointment?.vehicleDetails[0]?.make + ' ' +
-                          appointment?.vehicleDetails[0]?.model}}">{{appointment?.vehicleDetails[0]?.year + ' ' + appointment?.vehicleDetails[0]?.make + ' ' +
-                          appointment?.vehicleDetails[0]?.model}}</td>
-                          <td class="ellipsis group-hover:!bg-gray-100 hidden xl:table-cell" title="{{appointment?.vehicleDetails[0]?.licensePlate}}">{{appointment?.vehicleDetails[0]?.licensePlate}}</td>
-                          <td class="ellipsis group-hover:!bg-gray-100 hidden xl:table-cell" title="{{appointment?.vehicleDetails[0]?.mileage}}">{{appointment?.vehicleDetails[0]?.mileage}}</td>
-                          <td class="ellipsis group-hover:!bg-gray-100 hidden xl:table-cell" title="{{appointment?.providerDetails[0]?.name || 'Provider does not exist anymore'}}">{{appointment?.providerDetails[0]?.name || 'Provider does not exist anymore'}}</td>
-                      </tr>
-                  </tbody>
-                </table>
+                <div class="flex w-24 md:w-48">
+                  <button
+                    (click)="toggleView()"
+                    class="bg-white text-purple-500 text-md font-medium py-1 px-4 rounded-full mr-5 align-items-center w-full"
+                  >
+                    Schedule Appointment
+                  </button>
+                </div>
+              </div>
             </div>
+          </div>
+        @if(appointments.length > 0){
+        <div class="mt-3 p-3" @slideInOut>
+
+            <div class="display-6 text-purple-700">
+                My Appointments
+            </div>
+
+            <table class="table table-striped mt-3">
+                <thead>
+                    <tr>
+                        <th class="ellipsis" scope="col" title="Appointment Date">Appointment Date</th>
+                        <th class="ellipsis" scope="col">Status</th>
+                        <th class="ellipsis rounded-tr-md md:rounded-tr-none" scope="col">Last Updated</th>
+                        <th class="ellipsis hidden xl:table-cell" scope="col">Type</th>
+                        <th class="ellipsis hidden xl:table-cell" title="Vehicle" scope="col">Vehicle</th>
+                        <th class="ellipsis hidden xl:table-cell" title="License Plate" scope="col">License Plate</th>
+                        <th class="ellipsis hidden xl:table-cell" scope="col">Mileage</th>
+                        <th class="ellipsis hidden xl:table-cell" title="Provider Selected" scope="col">Provider
+                            Selected</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (appointment of appointments; track $index) {
+                    <tr class="hover:!bg-gray-100 relative cursor-pointer" (click)="selectAppointment(appointment)"
+                        [ngClass]="{'selected' : selectedAppointment?.appointmentID == appointment.appointmentID }">
+                        <td class="ellipsis pl-8 group-hover:!bg-gray-100" [ngClass]="{'open-appointment': appointment.appointmentStatus == 'Open', 'closed-appointment': appointment.appointmentStatus == 'Closed'}"
+                            title="{{appointment?.appointmentDate | date:'medium'}}">{{appointment?.appointmentDate |
+                            date:'medium'}}</td>
+                        <td class="ellipsis group-hover:!bg-gray-100" title="{{appointment?.appointmentStatus}}" [ngClass]="{'open-appointment': appointment.appointmentStatus == 'Open', 'closed-appointment': appointment.appointmentStatus == 'Closed'}">
+                            {{appointment?.appointmentStatus}}</td>
+                        <td class="ellipsis group-hover:!bg-gray-100" [ngClass]="{'open-appointment': appointment.appointmentStatus == 'Open', 'closed-appointment': appointment.appointmentStatus == 'Closed'}"
+                            title="{{appointment?.lastUpdate | date:'medium'}}">{{appointment?.lastUpdate |
+                            date:'medium'}}</td>
+                        <td class="ellipsis group-hover:!bg-gray-100 hidden xl:table-cell" [ngClass]="{'open-appointment': appointment.appointmentStatus == 'Open', 'closed-appointment': appointment.appointmentStatus == 'Closed'}"
+                            title="{{appointment?.serviceType}}">{{appointment?.serviceType}}</td>
+                        <td class="ellipsis group-hover:!bg-gray-100 hidden xl:table-cell" title="{{appointment?.vehicleDetails[0]?.year + ' ' + appointment?.vehicleDetails[0]?.make + ' ' +
+                          appointment?.vehicleDetails[0]?.model}}" [ngClass]="{'open-appointment': appointment.appointmentStatus == 'Open', 'closed-appointment': appointment.appointmentStatus == 'Closed'}">{{appointment?.vehicleDetails[0]?.year + ' ' +
+                            appointment?.vehicleDetails[0]?.make + ' ' +
+                            appointment?.vehicleDetails[0]?.model}}</td>
+                        <td class="ellipsis group-hover:!bg-gray-100 hidden xl:table-cell" [ngClass]="{'open-appointment': appointment.appointmentStatus == 'Open', 'closed-appointment': appointment.appointmentStatus == 'Closed'}"
+                            title="{{appointment?.vehicleDetails[0]?.licensePlate}}">
+                            {{appointment?.vehicleDetails[0]?.licensePlate}}</td>
+                        <td class="ellipsis group-hover:!bg-gray-100 hidden xl:table-cell" [ngClass]="{'open-appointment': appointment.appointmentStatus == 'Open', 'closed-appointment': appointment.appointmentStatus == 'Closed'}"
+                            title="{{appointment?.vehicleDetails[0]?.mileage}}">
+                            {{appointment?.vehicleDetails[0]?.mileage}}</td>
+                        <td class="ellipsis group-hover:!bg-gray-100 hidden xl:table-cell" [ngClass]="{'open-appointment': appointment.appointmentStatus == 'Open', 'closed-appointment': appointment.appointmentStatus == 'Closed'}"
+                            title="{{appointment?.providerDetails[0]?.name || 'Provider does not exist anymore'}}">
+                            {{appointment?.providerDetails[0]?.name || 'Provider does not exist anymore'}}</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
         }
 
     </div>
+
+    @if(extendedView=='expanded' && selectedAppointment.appointmentID){
+      <app-appointment-details [appointment]="selectedAppointment" (close)="closeAppointmentDetailsUser($event)" class="w-full lg:w-2/5"></app-appointment-details>
+    }
 </div>

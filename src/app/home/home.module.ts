@@ -9,7 +9,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { UpdateVehicleDialog, DeleteVehicleDialog } from './user-vehicles/vehicle-details/vehicle-details.component';
 import { UserVehiclesComponent } from './user-vehicles/user-vehicles.component';
 import { VehicleDetailsComponent } from './user-vehicles/vehicle-details/vehicle-details.component';
-import { UserAppointmentsComponent } from './user-appointments/user-appointments.component';
+import { AddAppointmentDialog, UserAppointmentsComponent } from './user-appointments/user-appointments.component';
+import { AppointmentDetailsComponent } from './user-appointments/appointment-details/appointment-details.component';
 
 
 
@@ -22,7 +23,9 @@ import { UserAppointmentsComponent } from './user-appointments/user-appointments
     UserAppointmentsComponent,
     UpdateVehicleDialog,
     DeleteVehicleDialog,
-    VehicleDetailsComponent
+    VehicleDetailsComponent,
+    AddAppointmentDialog,
+    AppointmentDetailsComponent
   ],
   imports: [
     CommonModule,

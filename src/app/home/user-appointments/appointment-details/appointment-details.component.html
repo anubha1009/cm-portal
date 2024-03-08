@@ -1,0 +1,186 @@
+<div class="flex flex-column flex-grow-1 md:ml-3 mr-3">
+    <div class="flex">
+      <div class="display-5 flex-grow-1 text-purple-900 mt-3 px-3 text-center md:text-start">
+        Service Appointment - {{appointment.appointmentDate | date: 'MMM d, y'}}
+      </div>
+      <div class="flex content-end ms-auto mt-3">
+        <div class="text-sm text-purple-900 font-bold cursor-pointer" (click)="goBack()">
+          Close
+        </div>
+      </div>
+    </div>
+  
+    <div class="flex flex-wrap ps-3 py-3" style="align-content: flex-start" [@fadeIn] [@fadeOut]>
+      <div class="flex flex-grow-1 flex-wrap gap-4">
+  
+        <div class="flip-card min-h-40 w-fit">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <p class="text-3xl font-thin text-white z-20">Vehicle</p>
+            </div>
+            <div class="flip-card-back">
+              <div class="flex flex-column w-4/5 xl:w-3/5">
+                <ng-container>
+                  <div class="flex gap-2">
+                    <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Year:
+                    </div>
+                    <div title="{{ appointment.vehicleDetails[0].year | titlecase }}"
+                      class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
+                      {{ appointment.vehicleDetails[0].year | titlecase }}</div>
+                  </div>
+
+                  <div class="flex gap-2">
+                    <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Make:
+                    </div>
+                    <div title="{{ appointment.vehicleDetails[0].make | titlecase }}"
+                      class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
+                      {{ appointment.vehicleDetails[0].make | titlecase }}</div>
+                  </div>
+
+                  <div class="flex gap-2">
+                    <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Model:
+                    </div>
+                    <div title="{{ appointment.vehicleDetails[0].model | titlecase }}"
+                      class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
+                      {{ appointment.vehicleDetails[0].model | titlecase }}</div>
+                  </div>
+
+                  <div class="flex gap-2">
+                    <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">VIN:
+                    </div>
+                    <div title="{{ appointment.vehicleDetails[0].VIN}}"
+                      class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
+                      {{ appointment.vehicleDetails[0].VIN}}</div>
+                  </div>
+
+                  <div class="flex gap-2">
+                    <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Year:
+                    </div>
+                    <div title="{{ appointment.vehicleDetails[0].year | titlecase }}"
+                      class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
+                      {{ appointment.vehicleDetails[0].year | titlecase }}</div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="flip-card min-h-40 w-fit">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <p class="text-3xl font-thin text-white z-20">Provider</p>
+            </div>
+            <div class="flip-card-back">
+              <div class="flex flex-column w-4/5">
+                <ng-container>
+                  <div class="flex gap-2">
+                    <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Name:
+                    </div>
+                    <div title="{{ appointment.providerDetails[0].name }}"
+                      class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
+                      {{ appointment.providerDetails[0].name }}</div>
+                  </div>
+
+                  <div class="flex gap-2">
+                    <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Address:
+                    </div>
+                    <div title="{{ appointment.providerDetails[0].address }}"
+                      class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
+                      {{ appointment.providerDetails[0].address }}</div>
+                  </div>
+
+                  <div class="flex gap-2">
+                    <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Email:
+                    </div>
+                    <div title="{{ appointment.providerDetails[0].email }}"
+                      class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
+                      {{ appointment.providerDetails[0].email }}</div>
+                  </div>
+
+                  <div class="flex gap-2">
+                    <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Phone:
+                    </div>
+                    <div title="{{ appointment.providerDetails[0].phone }}"
+                      class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
+                      {{ appointment.providerDetails[0].phone }}</div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Appointment Details -->
+      <div class="flex flex-col flex-grow-1 custom-card-purple w-full p-2 mt-4 text-center items-center justify-center">
+        <div
+          class="flex flex-grow-1 text-3xl font-thin text-white justify-center text-center border-opacity-50 border-b border-b-purple-50 md:w-3/4">
+          Appointment Details:
+        </div>
+  
+        <div class="flex flex-grow-1 justify-center w-full pt-3">
+          <div class="flex flex-column w-8/12 md:w-3/5">
+            <div class="flex gap-2">
+              <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Status:</div>
+              <div
+                class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+                {{ appointment.appointmentStatus }}</div>
+            </div>
+            <div class="flex gap-2">
+              <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Date/Time:</div>
+              <div
+                class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+                {{ appointment.appointmentDate | date: 'medium' }}</div>
+            </div>
+            <div class="flex gap-2">
+              <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Service Type:</div>
+              <div
+                class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+                {{ appointment.serviceType }}</div>
+            </div>
+            <div class="flex gap-2">
+              <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Notes:</div>
+              <div
+                class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+                {{ appointment.notes }}</div>
+            </div>
+            <div class="flex gap-2">
+              <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">License Plate:</div>
+              <div
+                class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+                {{ appointment.vehicleDetails[0].licensePlate }}</div>
+            </div>
+            <div class="flex gap-2">
+              <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">State Registered:</div>
+              <div
+                class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+                {{ appointment.vehicleDetails[0].state }}</div>
+            </div>
+            <div class="flex gap-2">
+              <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Mileage:</div>
+              <div
+                class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+                {{ appointment.vehicleDetails[0].mileage }}</div>
+            </div>
+            <div class="flex gap-2">
+              <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Mileage Date:</div>
+              <div
+                class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+                {{ appointment.vehicleDetails[0].mileageDate | date: 'MMM d, y' }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="flex flex-grow-1 gap-4 justify-center mt-4">
+        <button class="flex bg-purple-700 text-white font-thin text-lg flex-grow-1 justify-center rounded-lg p-3 hover:bg-purple-800">
+          Edit Appointment
+        </button>
+        <button class="flex bg-rose-600 text-white font-thin text-lg flex-grow-1 justify-center rounded-lg p-3 hover:bg-rose-700">
+          Cancel Appointment
+        </button>
+      </div>
+    </div>
+  </div>
