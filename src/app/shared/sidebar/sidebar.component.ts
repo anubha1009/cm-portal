@@ -37,13 +37,13 @@ export class SidebarComponent implements OnInit {
   isCollapsed = false;
   selectedItem = { index: 0, list: 'top' };
   menuItemsTop = [
-    {
-      name: 'Dashboard',
-      link: '/home',
-      icon: '../assets/images/home-smile-angle-svgrepo-com.svg',
-      iconSelected: '../assets/images/home-smile-angle-svgrepo-com-white.svg',
-      selected: true,
-    },
+    // {
+    //   name: 'Dashboard',
+    //   link: '/home',
+    //   icon: '../assets/images/home-smile-angle-svgrepo-com.svg',
+    //   iconSelected: '../assets/images/home-smile-angle-svgrepo-com-white.svg',
+    //   selected: true,
+    // },
     {
       name: 'Vehicles',
       link: '/home/vehicles',
@@ -60,7 +60,7 @@ export class SidebarComponent implements OnInit {
     },
     {
       name: 'Profile',
-      link: '/home/vehicles',
+      link: '/home/profile',
       icon: '../assets/images/profile-circle-svgrepo-com.svg',
       iconSelected: '../assets/images/profile-circle-svgrepo-com-white.svg',
       selected: false,

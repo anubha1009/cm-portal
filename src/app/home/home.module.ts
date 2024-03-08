@@ -10,7 +10,7 @@ import { UpdateVehicleDialog, DeleteVehicleDialog } from './user-vehicles/vehicl
 import { UserVehiclesComponent } from './user-vehicles/user-vehicles.component';
 import { VehicleDetailsComponent } from './user-vehicles/vehicle-details/vehicle-details.component';
 import { AddAppointmentDialog, UserAppointmentsComponent } from './user-appointments/user-appointments.component';
-import { AppointmentDetailsComponent } from './user-appointments/appointment-details/appointment-details.component';
+import { AppointmentDetailsComponent, CancelAppointmentDialog, UpdateAppointmentDialog } from './user-appointments/appointment-details/appointment-details.component';
 
 
 
@@ -25,7 +25,9 @@ import { AppointmentDetailsComponent } from './user-appointments/appointment-det
     DeleteVehicleDialog,
     VehicleDetailsComponent,
     AddAppointmentDialog,
-    AppointmentDetailsComponent
+    AppointmentDetailsComponent,
+    UpdateAppointmentDialog,
+    CancelAppointmentDialog
   ],
   imports: [
     CommonModule,

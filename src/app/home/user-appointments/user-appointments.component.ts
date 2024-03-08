@@ -116,7 +116,12 @@ export class UserAppointmentsComponent implements OnInit{
   }
 
   selectAppointment(appointment: any) {
-    this.selectedAppointment = appointment;
+    let obj = {
+      appointment: appointment,
+      vehicles: this.vehicles,
+      providers: this.providers
+    }
+    this.selectedAppointment = obj;
     this.extendedView = 'expanded';
   }
 

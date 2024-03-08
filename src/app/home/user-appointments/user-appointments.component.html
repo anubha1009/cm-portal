@@ -78,7 +78,7 @@
 
     </div>
 
-    @if(extendedView=='expanded' && selectedAppointment.appointmentID){
+    @if(extendedView=='expanded' && selectedAppointment?.appointment.appointmentID){
       <app-appointment-details [appointment]="selectedAppointment" (close)="closeAppointmentDetailsUser($event)" class="w-full lg:w-2/5"></app-appointment-details>
     }
 </div>

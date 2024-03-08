@@ -9,7 +9,9 @@ const routes: Routes = [
     { 
         path: '', component: HomeComponent,
         children: [
-            {path: '', component: UserDashboardComponent},
+            // {path: '', component: UserDashboardComponent},
+            // redirect undefined paths to vehicles
+            {path: '', redirectTo: 'vehicles', pathMatch: 'full'},
             {path: 'vehicles', component: UserVehiclesComponent},
             {path: 'appointments', component: UserAppointmentsComponent},
         ]
