@@ -119,12 +119,46 @@
     </div>
 
     <div class="flex flex-grow-1 gap-4 justify-center mt-4">
-      <button class="flex bg-purple-700 text-white font-thin text-lg flex-grow-1 justify-center rounded-lg p-3 hover:bg-purple-800" (click)="openUpdateDialog(vehicle)">
+      <button
+        class="flex bg-purple-700 text-white font-thin text-lg flex-grow-1 justify-center rounded-lg p-3 hover:bg-purple-800"
+        (click)="openUpdateDialog(vehicle)">
         Edit Vehicle
       </button>
-      <button class="flex bg-rose-600 text-white font-thin text-lg flex-grow-1 justify-center rounded-lg p-3 hover:bg-rose-700" (click)="openDeleteDialog(vehicle)">
+      <button
+        class="flex bg-rose-600 text-white font-thin text-lg flex-grow-1 justify-center rounded-lg p-3 hover:bg-rose-700"
+        (click)="openDeleteDialog(vehicle)">
         Delete Vehicle
       </button>
     </div>
+
+    @if(vehicle.maintenanceRecords.length > 0){
+      <div class="mt-5">
+        <div class="text-3xl font-thin text-purple-700">
+          Maintenance Records for {{vehicle.make}} {{vehicle.model}} {{vehicle.year}}
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th class="ellipsis" scope="col">Date</th>
+              <th class="ellipsis" scope="col">Service Type</th>
+              <th class="ellipsis" scope="col">Cost</th>
+              <th class="ellipsis" scope="col">Notes</th>
+              <th class="ellipsis" scope="col" title="Next Maintenance Date">Next Maintenance Date</th>
+              <th class="ellipsis" scope="col" title="Was Appointment Scheduled?">Was Appointment Scheduled?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let record of vehicle.maintenanceRecords">
+              <td class="ellipsis" title="{{record.date | date: 'mediumDate'}}">{{record.date | date: 'mediumDate'}}</td>
+              <td class="ellipsis" title="{{record?.type}}">{{record?.type}}</td>
+              <td class="ellipsis" title="{{record?.cost | currency}}">{{record?.cost | currency}}</td>
+              <td class="ellipsis" title="{{record?.notes}}">{{record?.notes}}</td>
+              <td class="ellipsis" title="{{record?.nextMaintenanceDate | date: 'mediumDate'}}">{{record?.nextMaintenanceDate | date: 'mediumDate'}}</td>
+              <td class="ellipsis" title="{{record.isAppointment ? 'Yes': 'No'}}">{{record.isAppointment ? 'Yes': 'No'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    }
   </div>
 </div>

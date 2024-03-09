@@ -29,6 +29,13 @@ export class ApiService {
     return this.http.post(this.baseUrl + '/users/login', {email, password});
   }
 
+  changeUserPassword(data: any){
+    let headers = {
+      'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+    }
+    return this.http.put(this.baseUrl + '/users/change-password', data, {headers});
+  }
+
   adminLogin(username: string, password: string){
     return this.http.post(this.baseUrl + '/admin/login', {username, password});
   }
@@ -121,6 +128,14 @@ export class ApiService {
       'Authorization': 'Bearer ' + sessionStorage.getItem('token')
     }
     return this.http.get(this.baseUrl + '/appointments/provider/' + providerId, {headers});
+  }
+
+  getMaintenanceRecordsByAppointment(appointmentId: string){
+    // add authorization header with jwt token
+    let headers = {
+      'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+    }
+    return this.http.get(this.baseUrl + '/maintenanceRecords/' + appointmentId, {headers});
   }
 
   createMaintenanceRecord(maintenanceRecord: any){

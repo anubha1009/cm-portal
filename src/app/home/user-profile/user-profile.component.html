@@ -1,0 +1,68 @@
+<div class="container d-flex justify-content-center align-items-center mt-auto h-100">
+    <div>
+        <div class="display-1 font-thin text-purple-700">Welcome, {{ownerDetails.name}}</div>
+        <div class="flex flex-row gap-4 mt-4 bg-purple-400  backdrop-blur-lg lg:backdrop-blur border-s-custom-purple-l-translucent rounded-xl shadow-2xl">
+            <div class="p-4 border-l-2">
+                <div class="display-4 text-purple-800 font-thin ms-3" id="modal-basic-title">
+                    User Details
+                </div>
+
+                <div class="text-lg text-purple-900 font-medium mt-5">
+                    <div class="flex justify-between items-center mb-2">
+                        <p class="font-bold">Email:</p>
+                        <p>{{ownerDetails.email}}</p>
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <p class="font-bold">Address:</p>
+                        <p>{{ownerDetails.address}}</p>
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <p class="font-bold">Name:</p>
+                        <p>{{ownerDetails.name}}</p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <p class="font-bold">Vehicle Count:</p>
+                        <p>{{vehicleCount}}</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div
+                class="p-4 border-l-2 border-purple-500">
+                <div class="display-4 text-purple-800 font-thin ms-3" id="modal-basic-title">
+                    Change Password
+                </div>
+                <div class="flex w-full mt-3 gap-4 flex-col lg:flex-row">
+                    <div class="flex flex-grow-1 text-xl font-thin items-center">
+                        <form [formGroup]="changePasswordForm" class="w-full" (ngSubmit)="changePassword()">
+                            <mat-form-field class="w-full">
+                                <mat-label>Current Password</mat-label>
+                                <input matInput type="password" formControlName="currentPassword" />
+                            </mat-form-field>
+
+                            <mat-form-field class="w-full">
+                                <mat-label>New Password</mat-label>
+                                <input matInput type="password" formControlName="newPassword" />
+                            </mat-form-field>
+
+                            <mat-form-field class="w-full">
+                                <mat-label>Confirm New Password</mat-label>
+                                <input matInput type="password" formControlName="confirmPassword" />   
+                            </mat-form-field>
+                            <div style="min-height: 20px;">
+                                <div *ngIf="changePasswordForm.errors?.['mismatch'] && changePasswordForm.get('confirmPassword')?.touched" class="text-amber-800 mb-3">
+                                    Passwords do not match.
+                                </div>
+                            </div>
+                            <!-- submit button goes here -->
+                            <button type="submit" class="bg-purple-700 text-white font-thin text-lg rounded-lg p-3 hover:bg-purple-800 w-full">
+                                Change Password
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

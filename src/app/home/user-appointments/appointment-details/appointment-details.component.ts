@@ -28,6 +28,7 @@ export class AppointmentDetailsComponent implements OnChanges {
 
   @Input() appointment: any;
   @Output() close = new EventEmitter<any>();
+  maintenanceRecords: any;
 
   constructor(private apiService: ApiService,
     private toastr: ToastrService,
@@ -40,9 +41,21 @@ export class AppointmentDetailsComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['appointment'].currentValue){
       this.appointment = changes['appointment'].currentValue;
+      if(this.appointment.appointment.appointmentStatus === 'Closed'){
+        this.getMaintenanceRecords();
+      }
     }
+  }
 
-    console.log(this.appointment);
+  getMaintenanceRecords(){
+    this.apiService.getMaintenanceRecordsByAppointment(this.appointment.appointment.appointmentID).subscribe((response: any) => {
+      this.maintenanceRecords = response;
+      console.log(this.maintenanceRecords);
+    },
+    (error: any) => {
+      console.log(error);
+    }
+    )
   }
 
   goBack(){;

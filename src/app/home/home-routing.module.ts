@@ -4,6 +4,7 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { HomeComponent } from './home/home.component';
 import { UserVehiclesComponent } from './user-vehicles/user-vehicles.component';
 import { UserAppointmentsComponent } from './user-appointments/user-appointments.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
     { 
@@ -14,6 +15,7 @@ const routes: Routes = [
             {path: '', redirectTo: 'vehicles', pathMatch: 'full'},
             {path: 'vehicles', component: UserVehiclesComponent},
             {path: 'appointments', component: UserAppointmentsComponent},
+            {path: 'profile', component: UserProfileComponent},
         ]
     }
 ];

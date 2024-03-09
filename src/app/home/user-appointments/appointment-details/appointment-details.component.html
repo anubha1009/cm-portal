@@ -1,7 +1,7 @@
 <div class="flex flex-column flex-grow-1 md:ml-3 mr-3">
     <div class="flex">
         <div class="display-5 flex-grow-1 text-purple-900 mt-3 px-3 text-center md:text-start">
-            Service Appointment - {{appointment.appointment.appointmentDate | date: 'MMM d, y'}}
+            Service Appointment <br> {{appointment.appointment.appointmentDate | date: 'MMM d, y'}}
         </div>
         <div class="flex content-end ms-auto mt-3">
             <div class="text-sm text-purple-900 font-bold cursor-pointer" (click)="goBack()">
@@ -196,5 +196,51 @@
             </button>
         </div>
         }
+
+        @if(appointment.appointment.appointmentStatus === 'Closed' && maintenanceRecords){
+            <div
+            class="flex flex-col flex-grow-1 custom-card-purple w-full p-2 mt-4 text-center items-center justify-center">
+            <div
+                class="flex flex-grow-1 text-3xl font-thin text-white justify-center text-center border-opacity-50 border-b border-b-purple-50 md:w-3/4">
+                Post Service Details:
+            </div>
+
+            <div class="flex flex-grow-1 justify-center w-full pt-3">
+                <div class="flex flex-column w-8/12 md:w-3/5">
+                    <div class="flex gap-2">
+                        <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Date Serviced:</div>
+                        <div
+                            class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+                            {{ maintenanceRecords.date | date: 'mediumDate' }}</div>
+                    </div>
+                    <div class="flex gap-2">
+                        <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Service Type:</div>
+                        <div
+                            class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+                            {{ maintenanceRecords.type }}</div>
+                    </div>
+                    <div class="flex gap-2">
+                        <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Cost:</div>
+                        <div
+                            class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+                            {{ maintenanceRecords.cost | currency }}</div>
+                    </div>
+                    <div class="flex gap-2">
+                        <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Notes:</div>
+                        <div
+                            class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+                            {{ maintenanceRecords.notes }}</div>
+                    </div>
+                    <div class="flex gap-2">
+                        <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Next Service Due:</div>
+                        <div
+                            class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
+                            {{ maintenanceRecords.nextMaintenanceDate | date: 'mediumDate' }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
     </div>
 </div>
+

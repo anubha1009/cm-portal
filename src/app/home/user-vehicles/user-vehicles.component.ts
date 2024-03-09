@@ -100,7 +100,8 @@ export class UserVehiclesComponent {
     } else {
       this.getVehiclesOfOwner();
       this.authService.setRoute({
-        index: 1,
+        // index: 1,
+        index: 0,
         list: 'top',
       });
     }
@@ -263,7 +264,7 @@ export interface Vehicle {
   year: string;
   VIN: string;
   image: string;
-  maintenanceRecords?: [];
+  maintenanceRecords?: [] | any;
   licensePlate?: string;
   state?: string;
   mileage?: number;
