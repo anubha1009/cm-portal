@@ -1,0 +1,82 @@
+<div class="flex h-100">
+    <div class="billListContainer flex-column h-100 flex-grow-1" [@expandShrink]="extendedView"
+        [ngClass]="{ 'hidden md:flex md:border-r md:border-purple-500': extendedView == 'expanded' }">
+
+        <div class="display-6 text-purple-700 p-3">
+            Manage Appointments
+        </div>
+
+        <div class="card custom-card-bg border-none rounded-2xl flex flex-row mx-2 my-2 py-3 px-3 md:py-4 md:px-5 justify-center items-center"
+            [@slideInOut]>
+            <form class="w-full">
+                <mat-form-field class="w-full text-purple-700">
+                    <input matInput placeholder="Enter Provider Name"
+                        class="border-none focus:border-none focus:bg-transparent" aria-label="Provider"
+                        [matAutocomplete]="auto" [formControl]="providerCtrl" required (focus)="onFocus()" />
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayProviderFn.bind(this)">
+                        <mat-option *ngFor="let provider of filteredProviders | async" [value]="provider.providerID">
+                            <span>{{ provider.name }} | {{ provider.address }}</span>
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </form>
+        </div>
+        @if(appointments.length > 0){
+        <div class="w-full mt-4">
+            <div class="overflow-hidden">
+                <table *ngIf="providers.length > 0" class="table-auto w-full mt-3">
+                    <thead>
+                        <tr>
+                            <th class="ellipsis text-left py-2 px-4">Appointment ID</th>
+                            <th class="ellipsis text-left py-2 px-4">Date & Time</th>
+                            <th class="ellipsis text-left py-2 px-4">Service Type</th>
+                            <th class="ellipsis text-left py-2 px-4 hidden xl:table-cell">Vehicle</th>
+                            <th class="ellipsis text-left py-2 px-4 hidden xl:table-cell">Customer Notes</th>
+                            <th class="ellipsis text-left py-2 px-4 hidden xl:table-cell">Status</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <!-- Scrollable Container for Table Body -->
+            <div class="overflow-y-auto max-height-custom rounded-b-3xl">
+                <table *ngIf="providers.length > 0" class="table-auto w-full">
+                    <tbody>
+                        <tr *ngFor="let appointment of appointments" class="hover:bg-gray-100 cursor-pointer"
+                            (click)="selectAppointment(appointment)"
+                            [ngClass]="{'bg-gray-200' : selectedAppointment?.appointmentID == appointment.appointmentID }">
+                            <td class="ellipsis py-2 px-4 whitespace-nowrap" title="{{appointment.appointmentID}}"
+                            [ngClass]="{'open-appointment': appointment.appointmentStatus == 'Open', 'closed-appointment': appointment.appointmentStatus == 'Closed'}">
+                                {{appointment?.appointmentID}}</td>
+                            <td class="ellipsis py-2 px-4 whitespace-nowrap"
+                                title="{{appointment?.appointmentDate | date:'medium'}}"
+                                [ngClass]="{'open-appointment': appointment.appointmentStatus == 'Open', 'closed-appointment': appointment.appointmentStatus == 'Closed'}">{{appointment?.appointmentDate
+                                | date:'medium'}}
+                            </td>
+                            <td class="ellipsis py-2 px-4 whitespace-nowrap" title="{{appointment.serviceType}}"
+                            [ngClass]="{'open-appointment': appointment.appointmentStatus == 'Open', 'closed-appointment': appointment.appointmentStatus == 'Closed'}">
+                                {{appointment?.serviceType}}</td>
+                            <td class="ellipsis py-2 px-4 whitespace-nowrap hidden xl:table-cell"
+                                title="{{appointment?.vehicleDetails[0]?.year}} {{appointment?.vehicleDetails[0]?.make}} {{appointment?.vehicleDetails[0]?.model}}"
+                                [ngClass]="{'open-appointment': appointment.appointmentStatus == 'Open', 'closed-appointment': appointment.appointmentStatus == 'Closed'}">
+                                {{appointment?.vehicleDetails[0]?.year}} {{appointment?.vehicleDetails[0]?.make}}
+                                {{appointment?.vehicleDetails[0]?.model}}</td>
+                            <td class="ellipsis py-2 px-4 whitespace-nowrap hidden xl:table-cell" title="{{appointment.notes}}"
+                            [ngClass]="{'open-appointment': appointment.appointmentStatus == 'Open', 'closed-appointment': appointment.appointmentStatus == 'Closed'}">
+                                {{appointment?.notes}}</td>
+                            <td class="ellipsis py-2 px-4 whitespace-nowrap hidden xl:table-cell"
+                                title="{{appointment.appointmentStatus}}"
+                                [ngClass]="{'open-appointment': appointment.appointmentStatus == 'Open', 'closed-appointment': appointment.appointmentStatus == 'Closed'}">
+                                {{appointment?.appointmentStatus}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        }
+    </div>
+
+    @if(extendedView=='expanded' && selectedAppointment?.appointmentID){
+        <app-appointment-details-admin [appointment]="selectedAppointment" (close)="closeAppointmentDetails($event)" class="w-full lg:w-2/5"></app-appointment-details-admin>
+      }
+</div>
+

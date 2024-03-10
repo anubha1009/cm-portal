@@ -1,0 +1,65 @@
+<div class="flex h-100">
+    <div
+      class="billListContainer flex-column h-100 flex-grow-1"
+      [@expandShrink]="extendedView"
+      [ngClass]="{ 'hidden md:flex md:border-r md:border-purple-500': extendedView == 'expanded' }"
+    >
+      <div class="" >
+        <div class="h-32 ml-2 md:ml-4 py-3 px-3 md:px-5 my-3 custom-banner rounded-xl mr-2 md:mr-3">
+          <div class="flex h-full">
+            <div class="flex flex-grow-1 items-center">
+              <div class="text-sm text-white font-thin ml-3 mt-2">
+                To add a provider, click the Add Provider button.
+              </div>
+            </div>
+            <div class="flex w-24 md:w-48">
+              <button
+                (click)="toggleAddProvider()"
+                class="bg-white text-purple-500 text-md font-medium py-1 px-4 rounded-full mr-5 align-items-center w-full"
+              >
+                Add Provider
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+  
+        <div class="my-vehicles p-3" @slideInOut>
+      
+          <div class="display-6 text-purple-700" *ngIf="providers.length > 0">
+              Manage Providers
+          </div>
+      
+          <div class="overflow-hidden">
+            <table *ngIf="providers.length > 0" class="table-auto w-full mt-3">
+                <thead>
+                    <tr>
+                        <th class="ellipsis text-left py-2 px-4">Provider Name</th>
+                        <th class="ellipsis hidden xl:table-cell text-left py-2 px-4">Email</th>
+                        <th class="ellipsis hidden xl:table-cell text-left py-2 px-4">Phone</th>
+                        <th class="ellipsis text-left py-2 px-4">Address</th>
+                    </tr>
+                </thead>
+            </table>
+          </div>
+          <!-- Scrollable Container for Table Body -->
+          <div class="overflow-y-auto max-height-custom rounded-b-3xl"> <!-- Adjust max-h as needed -->
+            <table *ngIf="providers.length > 0" class="table-auto w-full">
+                <tbody>
+                  <tr *ngFor="let provider of providers" class="hover:bg-gray-100 cursor-pointer" (click)="selectProvider(provider)" [ngClass]="{'bg-gray-200' : selectedProvider?.providerID == provider.providerID }">
+                      <td class="ellipsis py-2 px-4 whitespace-nowrap" title="{{provider.name}}">{{provider?.name}}</td>
+                      <td class="ellipsis hidden xl:table-cell py-2 px-4 whitespace-nowrap" title="{{provider?.email}}">{{provider?.email}}</td>
+                      <td class="ellipsis hidden xl:table-cell py-2 px-4 whitespace-nowrap" title="{{provider?.phone}}">{{provider?.phone}}</td>
+                      <td class="ellipsis py-2 px-4 whitespace-nowrap" title="{{provider?.address}}">{{provider?.address}}</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+  
+    @if(extendedView=='expanded' && selectedProvider.providerID){
+      <app-provider-details [provider]="selectedProvider" (close)="closeProviderDetails($event)" class="w-full lg:w-2/5"></app-provider-details>
+    }
+  </div>

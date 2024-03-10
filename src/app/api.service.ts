@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
+import { retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -53,17 +54,21 @@ export class ApiService {
     let headers = {
       'Authorization': 'Bearer ' + sessionStorage.getItem('token')
     }
-    const result = this.http.get(this.baseUrl + '/vehicles/' + ownerId, {headers});
-    console.log(result);
-    return this.http.get(this.baseUrl + '/vehicles/' + ownerId, {headers});
+    return this.http.get(this.baseUrl + '/vehicles/' + ownerId, {headers})
+      .pipe(
+        retry(3) // Retry this request up to 3 times in case of failure
+      );
   }
-
+  
   getVehiclesOfOwnerWithMR(ownerId: string){
     // add authorization header with jwt token
     let headers = {
       'Authorization': 'Bearer ' + sessionStorage.getItem('token')
     }
-    return this.http.get(this.baseUrl + '/vehicles/withMr/' + ownerId, {headers});
+    return this.http.get(this.baseUrl + '/vehicles/withMr/' + ownerId, {headers})
+      .pipe(
+        retry(3) // Retry this request up to 3 times in case of failure
+      );
   }
 
   addVehicleForOwner(vehicle: any){

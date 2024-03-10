@@ -1,7 +1,7 @@
 <div class="flex flex-column flex-grow-1 md:pl-3 pr-3 max-h-screen overflow-scroll">
     <div class="flex">
         <div class="display-5 flex-grow-1 text-purple-900 mt-3 px-3 text-center md:text-start">
-            Service Appointment <br> {{appointment.appointment.appointmentDate | date: 'MMM d, y'}}
+            Appointment Details
         </div>
         <div class="flex content-end ms-auto mt-3">
             <div class="text-sm text-purple-900 font-bold cursor-pointer" (click)="goBack()">
@@ -24,41 +24,41 @@
                                 <div class="flex gap-2">
                                     <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Year:
                                     </div>
-                                    <div title="{{ appointment.appointment.vehicleDetails[0].year}}"
+                                    <div title="{{ appointment.vehicleDetails[0].year}}"
                                         class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
-                                        {{ appointment.appointment.vehicleDetails[0].year}}</div>
+                                        {{ appointment.vehicleDetails[0].year}}</div>
                                 </div>
 
                                 <div class="flex gap-2">
                                     <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Make:
                                     </div>
-                                    <div title="{{ appointment.appointment.vehicleDetails[0].make | titlecase }}"
+                                    <div title="{{ appointment.vehicleDetails[0].make | titlecase }}"
                                         class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
-                                        {{ appointment.appointment.vehicleDetails[0].make | titlecase }}</div>
+                                        {{ appointment.vehicleDetails[0].make | titlecase }}</div>
                                 </div>
 
                                 <div class="flex gap-2">
                                     <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Model:
                                     </div>
-                                    <div title="{{ appointment.appointment.vehicleDetails[0].model | titlecase }}"
+                                    <div title="{{ appointment.vehicleDetails[0].model | titlecase }}"
                                         class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
-                                        {{ appointment.appointment.vehicleDetails[0].model | titlecase }}</div>
+                                        {{ appointment.vehicleDetails[0].model | titlecase }}</div>
                                 </div>
 
                                 <div class="flex gap-2">
                                     <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">VIN:
                                     </div>
-                                    <div title="{{ appointment.appointment.vehicleDetails[0].VIN}}"
+                                    <div title="{{ appointment.vehicleDetails[0].VIN}}"
                                         class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
-                                        {{ appointment.appointment.vehicleDetails[0].VIN}}</div>
+                                        {{ appointment.vehicleDetails[0].VIN}}</div>
                                 </div>
 
                                 <div class="flex gap-2">
                                     <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Year:
                                     </div>
-                                    <div title="{{ appointment.appointment.vehicleDetails[0].year}}"
+                                    <div title="{{ appointment.vehicleDetails[0].year}}"
                                         class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
-                                        {{ appointment.appointment.vehicleDetails[0].year}}</div>
+                                        {{ appointment.vehicleDetails[0].year}}</div>
                                 </div>
                             </ng-container>
                         </div>
@@ -69,7 +69,7 @@
             <div class="flip-card min-h-40 w-fit">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <p class="text-3xl font-thin text-white z-20">Provider</p>
+                        <p class="text-3xl font-thin text-white z-20">Owner</p>
                     </div>
                     <div class="flip-card-back">
                         <div class="flex flex-column w-4/5">
@@ -77,33 +77,33 @@
                                 <div class="flex gap-2">
                                     <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Name:
                                     </div>
-                                    <div title="{{ appointment.appointment.providerDetails[0].name }}"
+                                    <div title="{{ appointment.ownerDetails[0].name }}"
                                         class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
-                                        {{ appointment.appointment.providerDetails[0].name }}</div>
+                                        {{ appointment.ownerDetails[0].name }}</div>
                                 </div>
 
                                 <div class="flex gap-2">
                                     <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Address:
                                     </div>
-                                    <div title="{{ appointment.appointment.providerDetails[0].address }}"
+                                    <div title="{{ appointment.ownerDetails[0].address }}"
                                         class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
-                                        {{ appointment.appointment.providerDetails[0].address }}</div>
+                                        {{ appointment.ownerDetails[0].address }}</div>
                                 </div>
 
                                 <div class="flex gap-2">
                                     <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Email:
                                     </div>
-                                    <div title="{{ appointment.appointment.providerDetails[0].email }}"
+                                    <div title="{{ appointment.ownerDetails[0].email }}"
                                         class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
-                                        {{ appointment.appointment.providerDetails[0].email }}</div>
+                                        {{ appointment.ownerDetails[0].email }}</div>
                                 </div>
 
                                 <div class="flex gap-2">
                                     <div class="text-sm md:text-md lg:text-lg xl:text-xl text-white font-thin">Phone:
                                     </div>
-                                    <div title="{{ appointment.appointment.providerDetails[0].phone }}"
+                                    <div title="{{ appointment.ownerDetails[0].phone }}"
                                         class="text-sm md:text-md lg:text-lg xl:text-xl text-purple-950 font-thin text-right justify-end max-w-24 overflow-hidden whitespace-nowrap text-ellipsis ms-auto">
-                                        {{ appointment.appointment.providerDetails[0].phone }}</div>
+                                        {{ appointment.ownerDetails[0].phone }}</div>
                                 </div>
                             </ng-container>
                         </div>
@@ -126,78 +126,73 @@
                         <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Status:</div>
                         <div
                             class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
-                            {{ appointment.appointment.appointmentStatus }}</div>
+                            {{ appointment.appointmentStatus }}</div>
                     </div>
                     <div class="flex gap-2">
                         <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Date/Time:</div>
                         <div
                             class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
-                            {{ appointment.appointment.appointmentDate | date: 'medium' }}</div>
+                            {{ appointment.appointmentDate | date: 'medium' }}</div>
                     </div>
                     <div class="flex gap-2">
                         <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Service Type:</div>
                         <div
                             class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
-                            {{ appointment.appointment.serviceType }}</div>
+                            {{ appointment.serviceType }}</div>
                     </div>
                     <div class="flex gap-2">
                         <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Notes:</div>
                         <div
                             class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
-                            {{ appointment.appointment.notes }}</div>
+                            {{ appointment.notes }}</div>
                     </div>
                     <div class="flex gap-2">
                         <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">License Plate:</div>
                         <div
                             class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
-                            {{ appointment.appointment.vehicleDetails[0].licensePlate }}</div>
+                            {{ appointment.vehicleDetails[0].licensePlate }}</div>
                     </div>
                     <div class="flex gap-2">
                         <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">State Registered:
                         </div>
                         <div
                             class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
-                            {{ appointment.appointment.vehicleDetails[0].state }}</div>
+                            {{ appointment.vehicleDetails[0].state }}</div>
                     </div>
                     <div class="flex gap-2">
                         <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Mileage:</div>
                         <div
                             class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
-                            {{ appointment.appointment.vehicleDetails[0].mileage }}</div>
+                            {{ appointment.vehicleDetails[0].mileage }}</div>
                     </div>
                     <div class="flex gap-2">
                         <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Mileage Date:</div>
                         <div
                             class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
-                            {{ appointment.appointment.vehicleDetails[0].mileageDate | date: 'MMM d, y' }}
+                            {{ appointment.vehicleDetails[0].mileageDate | date: 'MMM d, y' }}
                         </div>
                     </div>
-                    <div class="flex gap-2" *ngIf="appointment.appointment.lastUpdate">
+                    <div class="flex gap-2" *ngIf="appointment.lastUpdate">
                         <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Last Updated:</div>
                         <div
                             class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
-                            {{ appointment.appointment.lastUpdate | date: 'medium' }}</div>
+                            {{ appointment.lastUpdate | date: 'medium' }}</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        @if(appointment.appointment.appointmentStatus === 'Open'){
+        @if(appointment.appointmentStatus === 'Open'){
         <div class="flex flex-grow-1 gap-4 justify-center mt-4">
             <button
                 class="flex bg-purple-700 text-white font-thin text-lg flex-grow-1 justify-center rounded-lg p-3 hover:bg-purple-800"
-                (click)="toggleUpdateDialog()">
-                Edit Appointment
-            </button>
-            <button
-                class="flex bg-rose-600 text-white font-thin text-lg flex-grow-1 justify-center rounded-lg p-3 hover:bg-rose-700"
-                (click)="toggleCancelDialog()">
-                Cancel Appointment
+                (click)="toggleCloseAppointment()">
+                Close Appointment
             </button>
         </div>
         }
 
-        @if(appointment.appointment.appointmentStatus === 'Closed' && maintenanceRecords){
+        @if(appointment.appointmentStatus === 'Closed' && appointment.maintenanceRecordDetails.length>0){
             <div
             class="flex flex-col flex-grow-1 custom-card-purple w-full p-2 mt-4 text-center items-center justify-center">
             <div
@@ -211,31 +206,31 @@
                         <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Date Serviced:</div>
                         <div
                             class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
-                            {{ maintenanceRecords.date | date: 'mediumDate' }}</div>
+                            {{ appointment.maintenanceRecordDetails[0].date | date: 'mediumDate' }}</div>
                     </div>
                     <div class="flex gap-2">
                         <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Service Type:</div>
                         <div
                             class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
-                            {{ maintenanceRecords.type }}</div>
+                            {{ appointment.maintenanceRecordDetails[0].type }}</div>
                     </div>
                     <div class="flex gap-2">
                         <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Cost:</div>
                         <div
                             class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
-                            {{ maintenanceRecords.cost | currency }}</div>
+                            {{ appointment.maintenanceRecordDetails[0].cost | currency }}</div>
                     </div>
-                    <div class="flex gap-2">
+                    <div class="ellipsis flex gap-2">
                         <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Notes:</div>
                         <div
-                            class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
-                            {{ maintenanceRecords.notes }}</div>
+                            class="ellipsis text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto" title="{{ appointment.maintenanceRecordDetails[0].notes }}">
+                            {{ appointment.maintenanceRecordDetails[0].notes }}</div>
                     </div>
                     <div class="flex gap-2">
                         <div class="text-sm md:text-md lg:text-md xl:text-lg text-white font-thin">Next Service Due:</div>
                         <div
                             class="text-sm md:text-md lg:text-md xl:text-lg text-purple-950 font-normal text-right justify-end ms-auto">
-                            {{ maintenanceRecords.nextMaintenanceDate | date: 'mediumDate' }}</div>
+                            {{ appointment.maintenanceRecordDetails[0].nextMaintenanceDate | date: 'mediumDate' }}</div>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,61 @@
+<div class="flex h-100">
+    <div
+      class="billListContainer flex-column h-100 flex-grow-1"
+      [@expandShrink]="extendedView"
+      [ngClass]="{ 'hidden md:flex md:border-r md:border-purple-500': extendedView == 'expanded' }"
+    >
+      <div class="" >
+        <div class="h-32 ml-2 md:ml-4 py-3 px-3 md:px-5 my-3 custom-banner rounded-xl mr-2 md:mr-3">
+          <div class="flex h-full">
+            <div class="flex flex-grow-1 items-center">
+              <div class="text-sm text-white font-thin ml-3 mt-2">
+                To add an admin, click the Add Admin button. To delete any admin, select the admin and click the delete button.
+              </div>
+            </div>
+            <div class="flex w-24 md:w-48">
+              <button
+                (click)="toggleAddAdmin()"
+                class="bg-white text-purple-500 text-md font-medium py-1 px-4 rounded-full mr-5 align-items-center w-full"
+              >
+                Add Admin
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+  
+        <div class="my-vehicles p-3" @slideInOut>
+      
+          <div class="display-6 text-purple-700" *ngIf="admins.length > 0">
+              Manage Admins
+          </div>
+      
+          <div class="overflow-hidden">
+            <table *ngIf="admins.length > 0" class="table-auto w-full mt-3">
+                <thead>
+                    <tr>
+                        <th class="ellipsis text-left py-2 px-4 w-1/4">Admin Name</th>
+                        <th class="ellipsis hidden xl:table-cell text-left py-2 px-4 w-1/4">Email</th>
+                        <th class="ellipsis text-left py-2 px-4 w-1/4">Username</th>
+                        <th class="ellipsis text-left py-2 px-4 w-1/4">Super Admin</th>
+                    </tr>
+                </thead>
+            </table>
+          </div>
+          <!-- Scrollable Container for Table Body -->
+          <div class="overflow-y-auto max-height-custom rounded-b-3xl"> <!-- Adjust max-h as needed -->
+            <table *ngIf="admins.length > 0" class="table-auto w-full">
+                <tbody>
+                    <tr *ngFor="let admin of admins" class="hover:bg-gray-100 cursor-pointer" (click)="selectAdmin(admin)" [ngClass]="{'bg-gray-200' : selectedAdmin?.username == admin.username }">
+                        <td class="ellipsis text-left py-2 px-4 w-1/4" title="{{admin.name}}">{{admin?.name}}</td>
+                        <td class="ellipsis hidden xl:table-cell text-left py-2 px-4 w-1/4" title="{{admin?.email}}">{{admin?.email}}</td>
+                        <td class="ellipsis text-left py-2 px-4 w-1/4" title="{{admin?.username}}">{{admin?.username}}</td>
+                        <td class="ellipsis text-left py-2 px-4 w-1/4" title="{{admin?.isSuperAdmin ? 'Yes' : 'No'}}">{{admin?.isSuperAdmin ? 'Yes' : 'No'}}</td>
+                    </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+  </div>

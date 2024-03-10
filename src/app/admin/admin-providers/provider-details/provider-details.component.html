@@ -1,0 +1,49 @@
+<div class="flex flex-column flex-grow-1 md:ml-3 lg:ml-6 mr-3">
+    <div class="flex">
+        <div class="display-5 flex-grow-1 text-purple-900 mt-3 px-3 text-center md:text-start">
+            {{ provider.name }}
+        </div>
+        <div class="flex content-end ms-auto mt-3">
+            <div class="text-sm text-purple-900 font-bold cursor-pointer" (click)="goBack()">
+                Close
+            </div>
+        </div>
+    </div>
+
+    <div class="flex w-full mt-3 gap-4 flex-col lg:flex-row p-4 bg-purple-500 rounded-3xl">
+        <div class="flex flex-grow-1 text-xl font-thin items-center">
+            <form [formGroup]="updateProviderForm" class="w-full">
+                <mat-form-field class="w-full">
+                    <mat-label>Provider Name</mat-label>
+                    <input matInput formControlName="name" placeholder="Enter Provider Name" />
+                </mat-form-field>
+                <mat-form-field class="w-full">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" placeholder="Enter Email" />
+                </mat-form-field>
+                <mat-form-field class="w-full">
+                    <mat-label>Phone</mat-label>
+                    <input matInput type="text" formControlName="phone" placeholder="Enter Phone Number" />
+                </mat-form-field>
+                <mat-form-field class="w-full">
+                    <mat-label>Address</mat-label>
+                    <input matInput formControlName="address" placeholder="Enter Address" />
+                </mat-form-field>
+            </form>
+        </div>
+    </div>
+    
+
+    <div mat-dialog-actions class="flex flex-row flex-grow-1 justify-center items-center gap-4 mt-4">
+        <button type="button" [disabled]="!updateProviderForm.valid"
+            class="flex bg-purple-700 text-white font-thin text-lg rounded-lg p-3 hover:bg-purple-800 w-full justify-center"
+            (click)="updateProvider()">
+            Update Provider
+        </button>
+        <button type="button"
+            class="flex bg-rose-600 text-white font-thin text-lg rounded-lg p-3 hover:bg-rose-700 w-full justify-center"
+            (click)="deleteProvider()">
+            Delete Provider
+        </button>
+    </div>
+</div>

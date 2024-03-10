@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('token', res.token);
           sessionStorage.setItem('role', 'admin');
           sessionStorage.setItem('admin', JSON.stringify(res.user));
-          this.router.navigate(['/home']);
+          this.router.navigate(['/admin']);
           this.toastr.success('Login Successful');
         }
       }, (err: any)=>{

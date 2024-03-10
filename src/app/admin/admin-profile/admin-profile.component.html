@@ -1,28 +1,28 @@
 <div class="container d-flex justify-content-center align-items-center mt-auto h-100">
     <div>
-        <div class="display-1 font-thin text-purple-700">Welcome, {{ownerDetails.name}}</div>
+        <div class="display-1 font-thin text-purple-700">Welcome, {{adminDetails.name}}</div>
         <div class="flex flex-col lg:flex-row gap-4 mt-4 bg-purple-400  backdrop-blur-lg lg:backdrop-blur border-s-custom-purple-l-translucent rounded-xl shadow-2xl">
             <div class="p-4 border-l-2">
                 <div class="display-4 text-purple-800 font-thin ms-3" id="modal-basic-title">
-                    User Details
+                    Admin Details
                 </div>
 
                 <div class="text-lg text-purple-900 font-medium mt-5">
                     <div class="flex justify-between items-center mb-2">
                         <p class="font-bold">Email:</p>
-                        <p>{{ownerDetails.email}}</p>
+                        <p>{{adminDetails.email}}</p>
                     </div>
                     <div class="flex justify-between items-center mb-2">
-                        <p class="font-bold">Address:</p>
-                        <p>{{ownerDetails.address}}</p>
+                        <p class="font-bold">Username:</p>
+                        <p>{{adminDetails.username}}</p>
                     </div>
                     <div class="flex justify-between items-center mb-2">
                         <p class="font-bold">Name:</p>
-                        <p>{{ownerDetails.name}}</p>
+                        <p>{{adminDetails.name}}</p>
                     </div>
                     <div class="flex justify-between items-center">
-                        <p class="font-bold">Vehicle Count:</p>
-                        <p>{{vehicleCount}}</p>
+                        <p class="font-bold">Is Super Admin:</p>
+                        <p>{{adminDetails.isSuperAdmin ? 'Yes' : 'No'}}</p>
                     </div>
                 </div>
             </div>
@@ -65,4 +65,4 @@
             </div>
         </div>
     </div>
-</div>
+</div><p>admin-profile works!</p>

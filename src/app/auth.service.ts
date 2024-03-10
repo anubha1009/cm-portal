@@ -25,6 +25,14 @@ export class AuthService {
     return this.sessionStorage?.getItem('token');
   }
 
+  isAdmin() {
+    return this.getRole() == 'admin';
+  }
+
+  isOwner() {
+    return this.getRole() == 'owner';
+  }
+
   getRole() {
     return this.sessionStorage?.getItem('role');
   }
@@ -47,5 +55,11 @@ export class AuthService {
 
   setLink(link: any) {
     this.link.next(link);
+  }
+  clearSession() {
+    this.sessionStorage?.clear();
+  }
+  isSuperAdmin() {
+    return JSON.parse(this.getUserDetails()!).isSuperAdmin;
   }
 }

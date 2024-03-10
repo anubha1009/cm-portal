@@ -36,46 +36,11 @@ export class SidebarComponent implements OnInit {
   isLeftVisible = false;
   isCollapsed = false;
   selectedItem = { index: 0, list: 'top' };
-  menuItemsTop = [
-    // {
-    //   name: 'Dashboard',
-    //   link: '/home',
-    //   icon: '../assets/images/home-smile-angle-svgrepo-com.svg',
-    //   iconSelected: '../assets/images/home-smile-angle-svgrepo-com-white.svg',
-    //   selected: true,
-    // },
-    {
-      name: 'Vehicles',
-      link: '/home/vehicles',
-      icon: '../assets/images/receipt-2-1-svgrepo-com.svg',
-      iconSelected: '../assets/images/receipt-2-1-svgrepo-com-white.svg',
-      selected: false,
-    },
-    {
-      name: 'Appointments',
-      link: '/home/appointments',
-      icon: '../assets/images/chat-round-svgrepo-com.svg',
-      iconSelected: '../assets/images/chat-round-svgrepo-com-white.svg',
-      selected: false,
-    },
-    {
-      name: 'Profile',
-      link: '/home/profile',
-      icon: '../assets/images/profile-circle-svgrepo-com.svg',
-      iconSelected: '../assets/images/profile-circle-svgrepo-com-white.svg',
-      selected: false,
-    },
-    {
-      name: 'Logout',
-      link: '/#',
-      icon: '../assets/images/logout-2-svgrepo-com.svg',
-      iconSelected: '../assets/images/logout-2-svgrepo-com-white.svg',
-      selected: false,
-    },
-  ];
-  menuCopy = this.menuItemsTop;
+  menuItemsTop : any[] = [];
+  menuCopy = [];
   role: string | null | undefined;
   userDetails: any;
+  adminDetails: any;
   @ViewChild('bounceButton') bounceButton: ElementRef | undefined;
   isMobile: boolean = true;
 
@@ -85,7 +50,7 @@ export class SidebarComponent implements OnInit {
     private router: Router
   ) {
     this.role = this.authService.getRole();
-    this.userDetails = JSON.parse(this.authService.getUserDetails()!);
+    this.setMenuItemsByRole();
     this.authService.getRoute().subscribe((data: any) => {
       console.log(data);
       this.selectedItem = data;
@@ -98,8 +63,18 @@ export class SidebarComponent implements OnInit {
       this.isLeftVisible = true;
     }
   }
+  
+  async setMenuItemsByRole() {
+    this.authService.isAdmin() ? this.menuItemsTop = (this.authService.isSuperAdmin() ? this.superAdminMenuItems : this.adminMenuItems) : 
+      this.menuItemsTop = this.ownerMenuItems;
+    this.userDetails = JSON.parse(this.authService.getUserDetails()!);
+    if (this.authService.isOwner()) {  
+      this.getVehicleCount();
+    }
+  }
 
   ngOnInit(): void {
+    this.setCurrentMenuItemBasedOnUrl();
     if (this.role == 'owner') {
       // check if owner has a vehicle
       this.getVehicleCount();
@@ -110,10 +85,19 @@ export class SidebarComponent implements OnInit {
       if (data == 'vehicles') {
         this.getVehicleCount();
       }
+
     });
     setTimeout(() => {
       this.bounceButton!.nativeElement.classList.add('bounce-right');
     }, 0);
+  }
+
+  setCurrentMenuItemBasedOnUrl() {
+    const currentUrl = this.router.url;
+    const foundIndex = this.menuItemsTop.findIndex(item => currentUrl == item.link);
+  if (foundIndex !== -1) {
+    this.setSelectedItem({ index: foundIndex, list: 'top' });
+  }
   }
 
   getVehicleCount() {
@@ -122,41 +106,13 @@ export class SidebarComponent implements OnInit {
       .subscribe((data: any) => {
         console.log(data);
         sessionStorage.setItem('vehiclesCount', data.length);
-        if (data.length == 0 && this.menuItemsTop.length == 3) {
+        if (data.length == 0) {
           this.menuItemsTop.splice(0, 1);
           this.setSelectedItem({
             index: 0,
             list: 'top',
           });
           this.router.navigate(['/home/vehicles']);
-        } else {
-          if (this.menuItemsTop.length == 2) {
-            this.menuItemsTop.splice(0, 0, {
-              name: 'Dashboard',
-              link: '/home',
-              icon: '../assets/images/home-smile-angle-svgrepo-com.svg',
-              iconSelected:
-                '../assets/images/home-smile-angle-svgrepo-com-white.svg',
-              selected: true,
-            });
-            console.log(this.menuItemsTop);
-          }
-          this.menuItemsTop.forEach((element) => {
-            if (window.location.href.includes(element.link)) {
-              element.selected = true;
-              this.selectedItem = {
-                index: this.menuItemsTop.indexOf(element),
-                list: 'top',
-              };
-              // set other items to false
-              this.menuItemsTop.forEach((item) => {
-                if (item.name != element.name) {
-                  item.selected = false;
-                }
-              });
-              return;
-            }
-          });
         }
       });
   }
@@ -169,9 +125,6 @@ export class SidebarComponent implements OnInit {
   setSelectedItem(item: { index: any; list: string }) {
     console.log(item);
     this.selectedItem = item;
-    if (item.index == 1 && item.list == 'bottom') {
-      this.logout();
-    }
   }
 
   getDivClass() {
@@ -201,4 +154,104 @@ export class SidebarComponent implements OnInit {
     sessionStorage.clear();
     window.location.reload();
   }
+
+  ownerMenuItems = [
+    {
+      name: 'Vehicles',
+      link: '/home/vehicles',
+      icon: '../assets/images/receipt-2-1-svgrepo-com.svg',
+      iconSelected: '../assets/images/receipt-2-1-svgrepo-com-white.svg',
+      selected: false,
+    },
+    {
+      name: 'Appointments',
+      link: '/home/appointments',
+      icon: '../assets/images/chat-round-svgrepo-com.svg',
+      iconSelected: '../assets/images/chat-round-svgrepo-com-white.svg',
+      selected: false,
+    },
+    {
+      name: 'Profile',
+      link: '/home/profile',
+      icon: '../assets/images/profile-circle-svgrepo-com.svg',
+      iconSelected: '../assets/images/profile-circle-svgrepo-com-white.svg',
+      selected: false,
+    },
+    {
+      name: 'Logout',
+      link: '/#',
+      icon: '../assets/images/logout-2-svgrepo-com.svg',
+      iconSelected: '../assets/images/logout-2-svgrepo-com-white.svg',
+      selected: false,
+    },
+  ];
+
+  adminMenuItems = [
+    {
+      name: 'Providers',
+      link: '/admin/providers',
+      icon: '../assets/images/receipt-2-1-svgrepo-com.svg',
+      iconSelected: '../assets/images/receipt-2-1-svgrepo-com-white.svg',
+      selected: false,
+    },
+    {
+      name: 'Appointments',
+      link: '/admin/appointments',
+      icon: '../assets/images/chat-round-svgrepo-com.svg',
+      iconSelected: '../assets/images/chat-round-svgrepo-com-white.svg',
+      selected: false,
+    },
+    {
+      name: 'Profile',
+      link: '/admin/profile',
+      icon: '../assets/images/profile-circle-svgrepo-com.svg',
+      iconSelected: '../assets/images/profile-circle-svgrepo-com-white.svg',
+      selected: false,
+    },
+    {
+      name: 'Logout',
+      link: '/#',
+      icon: '../assets/images/logout-2-svgrepo-com.svg',
+      iconSelected: '../assets/images/logout-2-svgrepo-com-white.svg',
+      selected: false,
+    },
+  ];
+
+  superAdminMenuItems = [
+    {
+      name: 'Manager',
+      link: '/admin/manager',
+      icon: '../assets/images/home-smile-angle-svgrepo-com.svg',
+      iconSelected: '../assets/images/home-smile-angle-svgrepo-com-white.svg',
+      selected: true,
+    },
+    {
+      name: 'Providers',
+      link: '/admin/providers',
+      icon: '../assets/images/receipt-2-1-svgrepo-com.svg',
+      iconSelected: '../assets/images/receipt-2-1-svgrepo-com-white.svg',
+      selected: false,
+    },
+    {
+      name: 'Appointments',
+      link: '/admin/appointments',
+      icon: '../assets/images/chat-round-svgrepo-com.svg',
+      iconSelected: '../assets/images/chat-round-svgrepo-com-white.svg',
+      selected: false,
+    },
+    {
+      name: 'Profile',
+      link: '/admin/profile',
+      icon: '../assets/images/profile-circle-svgrepo-com.svg',
+      iconSelected: '../assets/images/profile-circle-svgrepo-com-white.svg',
+      selected: false,
+    },
+    {
+      name: 'Logout',
+      link: '/#',
+      icon: '../assets/images/logout-2-svgrepo-com.svg',
+      iconSelected: '../assets/images/logout-2-svgrepo-com-white.svg',
+      selected: false,
+    },
+  ];
 }

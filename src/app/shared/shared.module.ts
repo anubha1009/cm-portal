@@ -15,9 +15,12 @@ import { provideToastr } from 'ngx-toastr';
 import { AppComponent } from '../app.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select'; 
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
+    SidebarComponent
   ],
   imports: [
     MatSidenavModule,
@@ -30,7 +33,9 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     HttpClientModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatAutocompleteModule,
+    CommonModule
   ],
   exports: [
     MatSidenavModule,
@@ -43,7 +48,9 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     HttpClientModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatAutocompleteModule,
+    SidebarComponent
   ],
   providers: [
     ApiService
