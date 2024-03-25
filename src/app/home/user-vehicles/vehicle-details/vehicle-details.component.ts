@@ -78,7 +78,7 @@ export class VehicleDetailsComponent implements OnChanges{
       }
     }
 
-    console.log(this.vehicle);
+    //console.log(this.vehicle);
   }
 
   goBack(){;
@@ -88,7 +88,7 @@ export class VehicleDetailsComponent implements OnChanges{
   async getVehicleImage(query: string): Promise<string> {
     const data = await this.apiService.getvehicleImage(query);
     const resultArray = data['results'];
-    console.log(resultArray[0].urls.regular);
+    //console.log(resultArray[0].urls.regular);
     return resultArray[0].urls.regular as string;
   }
 
@@ -103,7 +103,7 @@ export class VehicleDetailsComponent implements OnChanges{
           return acc;
         }
       }, {});
-      console.log(vehicleDetails);
+      //console.log(vehicleDetails);
       const image = await this.getVehicleImage(
         vehicleDetails['Make'] + ' ' + vehicleDetails['Model']
       );
@@ -132,7 +132,7 @@ export class VehicleDetailsComponent implements OnChanges{
         },
         image: image,
       };
-      console.log(this.vehicle);
+      //console.log(this.vehicle);
     });
   }
 
@@ -213,7 +213,7 @@ export class DeleteVehicleDialog {
     private apiService: ApiService,
     private authService: AuthService
   ) {
-    console.log(data);
+    //console.log(data);
   }
 
   deleteVehicle() {
@@ -316,7 +316,7 @@ export class UpdateVehicleDialog {
     private apiService: ApiService,
     private authService: AuthService
   ) {
-    console.log(data);
+    //console.log(data);
     this.editVehicleForm.patchValue({
       vehicleID: data.vehicleID,
       licensePlate: data.licensePlate,
@@ -335,7 +335,7 @@ export class UpdateVehicleDialog {
     this.apiService
       .updateVehicleForOwner(this.editVehicleForm.value)
       .subscribe((response: any) => {
-        console.log(response);
+        //console.log(response);
         if (response) {
           this.authService.setLink('vehicles');
           this.close(response.message);

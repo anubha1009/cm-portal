@@ -51,7 +51,7 @@ export class ProviderDetailsComponent implements OnChanges {
       this.updateProviderForm.patchValue(this.provider);
     }
 
-    console.log(this.provider);
+    //console.log(this.provider);
   }
 
   goBack() {

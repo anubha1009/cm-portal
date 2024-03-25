@@ -81,7 +81,7 @@ export class AdminDashboardComponent implements OnInit {
       this.admins = this.admins.filter((admin: any) => admin.username !== this.user.username);
     },
     (error) => {
-      console.log(error);
+      //console.log(error);
     });
   }
 
@@ -255,7 +255,7 @@ export class DeleteAdminDialog {
     private apiService: ApiService,
     private authService: AuthService
   ) {
-    console.log(data);
+    //console.log(data);
   }
 
   deleteAdmin() {

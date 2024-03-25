@@ -7,7 +7,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
 import { ToastrModule } from 'ngx-toastr';
 import { UpdateVehicleDialog, DeleteVehicleDialog } from './user-vehicles/vehicle-details/vehicle-details.component';
-import { UserVehiclesComponent } from './user-vehicles/user-vehicles.component';
+import { ReportDialog, UserVehiclesComponent } from './user-vehicles/user-vehicles.component';
 import { VehicleDetailsComponent } from './user-vehicles/vehicle-details/vehicle-details.component';
 import { AddAppointmentDialog, UserAppointmentsComponent } from './user-appointments/user-appointments.component';
 import { AppointmentDetailsComponent, CancelAppointmentDialog, UpdateAppointmentDialog } from './user-appointments/appointment-details/appointment-details.component';
@@ -28,7 +28,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     AppointmentDetailsComponent,
     UpdateAppointmentDialog,
     CancelAppointmentDialog,
-    UserProfileComponent
+    UserProfileComponent,
+    ReportDialog
   ],
   imports: [
     CommonModule,

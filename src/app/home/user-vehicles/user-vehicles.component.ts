@@ -21,6 +21,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import e from 'express';
 
 @Component({
   selector: 'app-user-vehicles',
@@ -147,7 +148,7 @@ export class UserVehiclesComponent {
           this.vehicles = response;
         },
         (error: any) => {
-          console.log(error);
+          //console.log(error);
         }
       );
   }
@@ -158,7 +159,7 @@ export class UserVehiclesComponent {
   }
 
   closeVehicleDetailsUser(event: any) {
-    console.log(event);
+    //console.log(event);
     if (event === 'back') {
       this.extendedView = 'collapsed';
       this.selectedVehicle = {};
@@ -174,7 +175,7 @@ export class UserVehiclesComponent {
 
   checkVinLength(event: any) {
     if (event.target.value.length === 17) {
-      console.log('VIN length is 17');
+      //console.log('VIN length is 17');
 
       this.getVehicleDetailsByVin(event.target.value);
     }
@@ -183,7 +184,7 @@ export class UserVehiclesComponent {
   async getVehicleImage(query: string): Promise<string> {
     const data = await this.apiService.getvehicleImage(query);
     const resultArray = data['results'];
-    console.log(resultArray[0].urls.regular);
+    //console.log(resultArray[0].urls.regular);
     return resultArray[0].urls.regular as string;
   }
 
@@ -199,7 +200,7 @@ export class UserVehiclesComponent {
           return acc;
         }
       }, {});
-      console.log(vehicleDetails);
+      //console.log(vehicleDetails);
       const image = await this.getVehicleImage(
         vehicleDetails['Make'] + ' ' + vehicleDetails['Model']
       );
@@ -231,7 +232,7 @@ export class UserVehiclesComponent {
         VIN: this.vin,
         image: image,
       };
-      console.log(this.vehicle);
+      //console.log(this.vehicle);
     });
   }
 
@@ -242,6 +243,36 @@ export class UserVehiclesComponent {
   selectVehicle(vehicle: any) {
     this.selectedVehicle = vehicle;
     this.extendedView = 'expanded';
+  }
+
+  generateReport() {
+    const dialogRef = this.dialog.open(ReportDialog, {
+      maxWidth: '100%',
+      height: 'auto',
+      hasBackdrop: true,
+      data: {
+        ownerID: this.ownerDetails.ownerID,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if(result != ''){
+        if(result === 'No Records' || result === 'Error'){
+          if(result === 'No Records'){
+            this.toastr.info('No records found for the selected date range');
+          }
+          if(result === 'Error'){
+            this.toastr.error('Error downloading report');
+          }
+        }
+        else{
+          this.toastr.success(result);
+        }
+      }
+      else{
+        this.toastr.error('Report cancelled');
+      }
+    });
   }
 }
 
@@ -270,4 +301,127 @@ export interface Vehicle {
   mileage?: number;
   mileageDate?: string;
   vehicleID?: string;  
+}
+
+@Component({
+  selector: 'report-dialog',
+  template: `
+    <div class="p-4 bg-purple-500 bg-opacity-50  backdrop-blur-lg lg:backdrop-blur border-s-custom-purple-l-translucent">
+      <h4
+        class="display-6 text-purple-950 font-thin ms-3"
+        id="modal-basic-title"
+      >
+        Download Reports
+      </h4>
+      <div class="flex w-full mt-3 gap-4 flex-col lg:flex-row">
+        <div
+          class="flex flex-grow-1 text-xl font-thin items-center"
+        >
+          <form
+            [formGroup]="reportForm"
+            class="w-full"
+          >
+            <mat-form-field class="w-full">
+              <mat-label>Start Date</mat-label>
+              <input
+                matInput
+                formControlName="startDate"
+                type="date"
+              />
+            </mat-form-field>
+            <mat-form-field class="w-full">
+              <mat-label>End Date</mat-label>
+              <input
+                matInput
+                formControlName="endDate"
+                type="date"
+                max="{{ today }}"
+              />
+            </mat-form-field>
+          </form>
+        </div>
+
+        <div mat-dialog-actions class="flex flex-row lg:flex-col flex-grow-1 justify-center items-center lg:ms-auto">
+          <button
+            type="button"
+            [disabled]="!reportForm.valid"
+            class="bg-purple-700 text-white font-thin text-lg rounded-lg p-3 hover:bg-purple-800 w-full"
+            (click)="downloadReport()"
+          >
+            Download
+          </button>
+          <button
+            type="button"
+            class="bg-rose-600 text-white font-thin text-lg rounded-lg p-3 hover:bg-rose-700 w-full mt-3"
+            (click)="close('')"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  `,
+})
+export class ReportDialog {
+  reportForm = new FormGroup({
+    ownerID: new FormControl(''),
+    startDate: new FormControl('', Validators.required),
+    endDate: new FormControl('', Validators.required),
+  });
+  today = new Date().toISOString().slice(0, 10);
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public modal: MatDialogRef<ReportDialog>,
+    private apiService: ApiService,
+    private authService: AuthService
+  ) {
+    //console.log(data);
+    this.reportForm.patchValue({
+      ownerID: data.ownerID,
+      endDate: new Date().toISOString().slice(0, 10),
+    });
+  }
+
+  onEdit() {
+    if (this.reportForm.valid) {
+      this.downloadReport();
+    }
+  }
+
+  async downloadReport() {
+    const data = {
+      ownerID: this.reportForm.get('ownerID')?.value,
+      startDate: new Date(this.reportForm.get('startDate')?.value!).toISOString(),
+      endDate: new Date(this.reportForm.get('endDate')?.value!).toISOString(),
+    };
+  
+    try {
+      const response = await this.apiService.downloadReport(data);
+      // Check if response is a Blob
+      if (response instanceof Blob) {
+        // Create a blob URL for the PDF
+        const fileURL = URL.createObjectURL(response);
+        
+        // Display success message
+        this.close('Report downloaded successfully');
+        // Open the PDF in a new tab
+        window.open(fileURL);
+      } else {
+        // Handle non-Blob responses (e.g., error)
+        this.close('Error downloading report');
+      }
+    } catch (error: any) {
+      if(error.status === 404){
+        this.close('No Records')
+      }
+      else{
+        this.close('Error');
+      }
+    }
+  }
+
+  close(value: string) {
+    this.modal.close(value);
+  }
 }

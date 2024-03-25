@@ -50,10 +50,10 @@ export class AppointmentDetailsComponent implements OnChanges {
   getMaintenanceRecords(){
     this.apiService.getMaintenanceRecordsByAppointment(this.appointment.appointment.appointmentID).subscribe((response: any) => {
       this.maintenanceRecords = response;
-      console.log(this.maintenanceRecords);
+      //console.log(this.maintenanceRecords);
     },
     (error: any) => {
-      console.log(error);
+      //console.log(error);
     }
     )
   }
@@ -63,7 +63,7 @@ export class AppointmentDetailsComponent implements OnChanges {
   }
 
   toggleUpdateDialog() {
-    console.log(this.appointment);
+    //console.log(this.appointment);
     const dialogRef = this.dialog.open(UpdateAppointmentDialog, {
       data: this.appointment,
       maxWidth: '100%',
@@ -313,7 +313,7 @@ export class CancelAppointmentDialog {
     private apiService: ApiService,
     private authService: AuthService
   ) {
-    console.log(data);
+    //console.log(data);
   }
 
   cancelAppointment() {

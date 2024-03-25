@@ -36,7 +36,7 @@ export class AdminProfileComponent {
   changePassword() {
     // check if form is valid
     if (this.changePasswordForm.invalid) {
-      console.log('invalid form');
+      //console.log('invalid form');
       return;
     }
 
@@ -50,7 +50,7 @@ export class AdminProfileComponent {
     this.apiService.changePassword(obj).subscribe((res: any) => {
       this.toastr.success(res.message);
     }, (err: any) => {
-      console.log(err);
+      //console.log(err);
       this.toastr.error(err.error.error);
     });
 

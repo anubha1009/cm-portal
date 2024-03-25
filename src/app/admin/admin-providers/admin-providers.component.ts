@@ -81,7 +81,7 @@ export class AdminProvidersComponent {
       });
     },
     (error) => {
-      console.log(error);
+      //console.log(error);
     });
   }
 
@@ -91,7 +91,7 @@ export class AdminProvidersComponent {
   }
 
   closeProviderDetails(event: any) {
-    console.log(event);
+    //console.log(event);
     if (event === 'back') {
       this.extendedView = 'collapsed';
       this.selectedProvider = {};

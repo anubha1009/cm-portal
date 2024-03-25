@@ -52,9 +52,9 @@ export class SidebarComponent implements OnInit {
     this.role = this.authService.getRole();
     this.setMenuItemsByRole();
     this.authService.getRoute().subscribe((data: any) => {
-      console.log(data);
+      //console.log(data);
       this.selectedItem = data;
-      console.log(this.menuItemsTop);
+      //console.log(this.menuItemsTop);
     });
 
     //get user device resolution
@@ -81,7 +81,7 @@ export class SidebarComponent implements OnInit {
     }
 
     this.authService.getLink().subscribe((data: any) => {
-      console.log(data);
+      //console.log(data);
       if (data == 'vehicles') {
         this.getVehicleCount();
       }
@@ -104,7 +104,7 @@ export class SidebarComponent implements OnInit {
     this.apiService
       .getVehiclesOfOwner(this.userDetails?.ownerID)
       .subscribe((data: any) => {
-        console.log(data);
+        //console.log(data);
         sessionStorage.setItem('vehiclesCount', data.length);
         if (data.length == 0) {
           this.menuItemsTop.splice(0, 1);
@@ -118,12 +118,12 @@ export class SidebarComponent implements OnInit {
   }
 
   setLeftVisible(value: boolean) {
-    console.log("Left visible: " + value);
+    //console.log("Left visible: " + value);
     this.isLeftVisible = value;
   }
 
   setSelectedItem(item: { index: any; list: string }) {
-    console.log(item);
+    //console.log(item);
     this.selectedItem = item;
   }
 

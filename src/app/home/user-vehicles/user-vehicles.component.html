@@ -52,8 +52,20 @@
     @if (vehiclesCount) {
       <div class="my-vehicles p-3" @slideInOut>
     
-        <div class="display-6 text-purple-700" *ngIf="vehicles.length > 0">
-            My Fleet
+        <div class="flex flex-grow" *ngIf="vehicles.length > 0">
+          <div class="display-6 text-purple-700 flex justify-start">
+              My Fleet
+          </div>
+
+          <!-- button to generate report -->
+          <div class="flex flex-grow justify-end">
+            <button
+              class="bg-purple-500 bg-opacity-90 text-white text-md font-thin py-3 px-3 rounded-full"
+              (click)="generateReport()"
+            >
+              Generate Report
+            </button>
+          </div>
         </div>
     
         <table *ngIf="vehicles.length > 0" class="table table-striped mt-3">

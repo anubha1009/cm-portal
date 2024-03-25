@@ -46,7 +46,7 @@ export class AppointmentDetailsComponent implements OnChanges {
   }
 
   toggleCloseAppointment(){
-    console.log(this.appointment);
+    //console.log(this.appointment);
     const dialogRef = this.dialog.open(CloseAppointmentDialog, {
       data: this.appointment,
       maxWidth: '100%',

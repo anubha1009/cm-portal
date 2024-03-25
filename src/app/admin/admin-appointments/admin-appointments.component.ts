@@ -91,7 +91,7 @@ export class AdminAppointmentsComponent implements OnInit {
       });
     },
     (error) => {
-      console.log(error);
+      //console.log(error);
     });
   }
 
@@ -111,7 +111,7 @@ export class AdminAppointmentsComponent implements OnInit {
 
   getAppointments() {
     if (this.providerCtrl.value) {
-      console.log(this.providerCtrl.value);
+      //console.log(this.providerCtrl.value);
       this.apiService.getAppointmentsOfProvider(this.providerCtrl.value).subscribe((data: any) => {
         this.appointments = data.sort((a: any, b: any) => {
           // Sort by status first: Open > Closed > Cancelled
@@ -126,7 +126,7 @@ export class AdminAppointmentsComponent implements OnInit {
         });
       },
       (error) => {
-        console.log(error);
+        //console.log(error);
       });
     }
     else{
@@ -140,7 +140,7 @@ export class AdminAppointmentsComponent implements OnInit {
   }
 
   closeAppointmentDetails(event: any) {
-    console.log(event);
+    //console.log(event);
     if(event === 'back'){
       this.extendedView = 'collapsed';
       this.selectedAppointment = {};

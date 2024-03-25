@@ -14,6 +14,14 @@ export class ApiService {
   constructor(private http: HttpClient) { 
   }
 
+  async downloadReport(data: any) : Promise<any> {
+      let headers = {
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+      }
+      const response = await this.http.post(this.baseUrl + '/reports', data, { headers, responseType: 'blob' }).toPromise();
+      return response;
+  }
+
   async getvehicleImage(query: string) : Promise<any> {
     let headers = {
       'Authorization': 'Client-ID ' + this.clientId,
@@ -164,7 +172,7 @@ export class ApiService {
     let headers = {
       'Authorization': 'Bearer ' + sessionStorage.getItem('token')
     }
-    console.log(provider);
+    //console.log(provider);
     return this.http.put(this.baseUrl + '/providers', provider, {headers});
   }
 
@@ -173,7 +181,7 @@ export class ApiService {
     let headers = {
       'Authorization': 'Bearer ' + sessionStorage.getItem('token')
     }
-    console.log(providerId);
+    //console.log(providerId);
     return this.http.delete(this.baseUrl + '/providers/'+ providerId, {headers});
   }
 
@@ -190,7 +198,7 @@ export class ApiService {
     let headers = {
       'Authorization': 'Bearer ' + sessionStorage.getItem('token')
     }
-    console.log(admin);
+    //console.log(admin);
     return this.http.post(this.baseUrl + '/admin', admin, {headers});
   }
 
@@ -199,7 +207,7 @@ export class ApiService {
     let headers = {
       'Authorization': 'Bearer ' + sessionStorage.getItem('token')
     }
-    console.log(username);
+    //console.log(username);
     return this.http.delete(this.baseUrl + '/admin/'+ username, {headers});
   }
 

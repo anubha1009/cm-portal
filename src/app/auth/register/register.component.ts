@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     // );
     // google.maps.event.addListener(autocomplete, 'place_changed', () => {
     //   const place = autocomplete.getPlace();
-    //   console.log(place);
+    //   //console.log(place);
     //   if (place.formatted_address) {
     //     this.signUpForm.patchValue({
     //       address: place.formatted_address

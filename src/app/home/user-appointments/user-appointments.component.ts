@@ -89,10 +89,10 @@ export class UserAppointmentsComponent implements OnInit{
     this.apiService.getAppointmentsOfOwner(this.owner.ownerID).subscribe((response: any) => {
       this.appointments = response;
       this.setProviderNames();
-      console.log(this.appointments);
+      //console.log(this.appointments);
     },
     (error: any) => {
-      // console.log(error);
+      // //console.log(error);
     })
   }
 
@@ -100,14 +100,14 @@ export class UserAppointmentsComponent implements OnInit{
     this.apiService.getVehiclesOfOwner(this.owner.ownerID).subscribe((response: any) => {
       this.vehicles = response;
     }, (error: any) => {
-      console.log(error);
+      //console.log(error);
     })
   }
 
   setProviderNames(){
     this.apiService.getAllProviders().then((response: any) => {
       this.providers = response;
-      // console.log(this.providers);
+      // //console.log(this.providers);
     })
   }
 
@@ -150,7 +150,7 @@ export class UserAppointmentsComponent implements OnInit{
   }
 
   closeAppointmentDetailsUser(event: any) {
-    console.log(event);
+    //console.log(event);
     if(event === 'back'){
       this.extendedView = 'collapsed';
       this.selectedAppointment = {};
